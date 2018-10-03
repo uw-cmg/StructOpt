@@ -1,0 +1,73 @@
+{
+    "logging": { },
+    "structure_type": "crystal",
+    "generators": {
+        "sphere": {"number_of_individuals": 10,
+                     "kwargs": {"atomlist": [["Al", 3692]],
+                               "cell": [39.373333,39.373333,39.373333]}}
+    },
+    "fitnesses": {
+        "LAMMPS": {"weight": 1.0,
+                   "kwargs": {"use_mpi4py": true,
+                              "MPMD": 0,
+                              "keep_files": false,
+                              "min_style": "cg",
+                              "min_modify": "line quadratic",
+                              "minimize": "1e-8 1e-8 0 0",
+                              "pair_style": "eam/fs", 
+                              "potential_file": "$STRUCTOPT_HOME/potentials/Al.eam.fs",
+                              "thermo_steps": 0}},
+        "FEMSIM": {"weight": 10.0,
+                   "kwargs": {"use_mpi4py": false,
+                              "MPMD": "8-20",
+                              "parameter_filename": "$STRUCTOPT_HOME/examples/crystal/MG_Al/3692.in",
+                              "vk_data_filename": "$STRUCTOPT_HOME/examples/crystal/MG_Al/phantom_3692.txt",
+                              "xsize": 39.373333,
+                              "ysize": 39.373333,
+                              "zsize": 39.373333,
+                              "Q": 0.065730041,
+                              "nphi": 1,
+                              "npsi": 80,
+                              "ntheta": 40,
+                              "thickness_scaling_factor": 1.0}}
+    },
+    "relaxations": {
+        "LAMMPS": {"order": 0,
+                   "kwargs": {"use_mpi4py": true,
+                              "MPMD": 0,
+                              "keep_files": false,
+                              "min_style": "cg",
+                              "min_modify": "line quadratic",
+                              "minimize": "1e-8 1e-8 10000 10000",
+                              "pair_style": "eam/fs", 
+                              "potential_file": "$STRUCTOPT_HOME/potentials/Al.eam.fs",
+                              "thermo_steps": 0}}
+    },
+    "convergence": {
+        "max_generations": 1000
+    },
+    "mutations": {
+        "preserve_best": true,
+        "move_atoms": {"probability": 0.3},
+        "swap_positions": {"probability": 0.0},
+        "swap_species": {"probability": 0.0},
+        "rotate_atoms": {"probability": 0.0},
+        "rotate_cluster": {"probability": 0.0},
+        "rotate_all": {"probability": 0.0}
+    },
+    "fingerprinters": {
+        "all_close_atom_positions": {"probability": 1.0}
+    },
+    "crossovers": {
+        "rotate": {"probability": 1.0}
+    },
+    "predators": { 
+        "tournament": {"probability": 1.0}
+    },
+    "selections": {
+        "rank": {"probability": 1.0}
+    },
+    "fileio": {},
+    "post_processing": {"XYZs": 10},
+    "tools": {}
+}

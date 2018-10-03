@@ -1,0 +1,101 @@
+{
+    "logging":
+    { },
+    "convergence": {
+        "maxgen": 1
+    },
+    "generators": {
+        "structure_type": "cluster",
+        "initializers": {
+	    "read_xyz": {"number_of_individuals": 4,
+			 "kwargs": ["$STRUCTOPT_HOME/examples/MG_Zr50Cu35Al15/Zr50Cu35Al15_start.xyz", 
+				    "$STRUCTOPT_HOME/examples/MG_Zr50Cu35Al15/Zr50Cu35Al15_t1_final.xyz",
+				    "$STRUCTOPT_HOME/examples/MG_Zr50Cu35Al15/Zr50Cu35Al15_t2_final.xyz",
+				    "$STRUCTOPT_HOME/examples/MG_Zr50Cu35Al15/Zr50Cu35Al15_t3_final.xyz"]}
+	}
+    },
+    "fitnesses":
+    {
+	"modules": [
+	    "LAMMPS",
+	    "FEMSIM"
+	],
+	"weights": [
+	    1.0,
+	    1.0
+	],
+	"LAMMPS": {
+	    "use_mpi4py": true,
+	    "MPMD_cores_per_structure": 0,
+	    "keep_files": true, 
+	    "min_style": "cg\nmin_modify line quadratic", 
+	    "minimize": "1e-8 1e-8 5000 10000", 
+	    "pair_style": "eam/alloy", 
+	    "potential_file": "$STRUCTOPT_HOME/potentials/ZrCuAl2011.eam.alloy", 
+	    "thermo_steps": 1000
+	},
+	"FEMSIM": {
+	    "use_mpi4py": false,
+	    "MPMD_cores_per_structure": "2-3",
+	    "parameter_filename": "$HOME/femsim-hrmc/parameters/femsim.in",
+	    "vk_data_filename": "$HOME/femsim-hrmc/data/fem_exp_Zr50Cu35Al15_t3.txt",
+	    "xsize": 28.2842712474619,
+	    "ysize": 28.2842712474619,
+	    "zsize": 28.2842712474619,
+	    "Q": 0.0305,
+	    "nphi": 1,
+	    "npsi": 40,
+	    "ntheta": 20,
+	    "thickness_scaling_factor": 28.6378
+	}
+    },
+    "relaxations":
+    {
+	"modules": [
+	    "hard_sphere_cutoff",
+	    "LAMMPS"
+	],
+	"LAMMPS": {
+	    "use_mpi4py": true,
+	    "MPMD_cores_per_structure": 0,
+	    "keep_files": true, 
+	    "min_style": "cg\nmin_modify line quadratic", 
+	    "minimize": "1e-8 1e-8 5000 10000", 
+	    "pair_style": "eam/alloy", 
+	    "potential_file": "$STRUCTOPT_HOME/potentials/ZrCuAl2011.eam.alloy", 
+	    "thermo_steps": 1000
+	},
+	"hard_sphere_cutoff": {
+	    "use_mpi4py": true,
+	    "MPMD_cores_per_structure": 0
+	}
+    },
+    "mutations": {
+	"options": {
+	    "move_atoms": 0.70,
+	    "swap_positions": 0.05,
+	    "swap_species": 0.10,
+	    "rotate_atoms": 0.05,
+	    "rotate_cluster": 0.10
+	},
+	"kwargs": {}
+    },
+    "fingerprinters": {
+	"options": []
+    },
+
+    "crossovers": {
+	"options": {"rotate": 0.0}
+    },
+    "predators": {
+	"options": {"best": 1.0}
+    },
+    "selections": {
+	"options": {"random_selection": 1.0}
+    },
+
+    "fileio": {},
+    "postprocessing": {},
+    "tools": {}
+}
+

@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2017-01-23 Mon 13:10 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>JobManager</title>
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Zhongnan Xu" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">JobManager</h1>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="sec-introduction"><a id="orgheadline1"></a>Introduction</h2>
+<div class="outline-text-2" id="text-sec-introduction">
+<p>
+The purpose of the <code>JobManager</code> module is to provide a python wrapper for submitting and tracking jobs in a queue environment.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="sec-configuration"><a id="orgheadline2"></a>Configuration</h2>
+<div class="outline-text-2" id="text-sec-configuration">
+<p>
+The <code>JobManager</code> is initially built for a PBS queue environment, so many of the commands will have to be modified for usage in a different queue environment. These customizations will likely take place in the following files.
+</p>
+
+<ol class="org-ol">
+<li>The <code>submit</code> and <code>write_submit</code> function in the <code>structopt/utilities/job_manager.py</code> file will likely need to be updated to reflect your specific queue environment.</li>
+
+<li>The dictionaries held in <code>structopt.utilities/rc.py</code> is the first attempt to store some dictionaries specific to the queue environment. Many queue specific variables are drawn from here.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="sec-submit"><a id="orgheadline5"></a>Submitting jobs</h2>
+<div class="outline-text-2" id="text-sec-submit">
+</div>
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="sec-submit-single"><a id="orgheadline3"></a>Single job</h3>
+<div class="outline-text-3" id="text-sec-submit-single">
+<p>
+The script below is an example script of submitting a single job to a queue using the <code>JobManager</code>. The optimization run is a short run of a Au<sub>55</sub> nanoparticle using only LAMMPS. A large part of the script is defining the input, which goes into the <code>JobManager</code> class. These inputs are given below.
+</p>
+
+<ol class="org-ol">
+<li><code>calcdir</code>: This is a string that tells where the calculation is run. Note that the calculation itself is run within the <code>calcdir/logs{time}</code> directory, which is created when the job starts to run on the queue. Unless an absolute path, the <code>calcdir</code> directory is always given with respect to directory that the job script is run from</li>
+
+<li><code>optimizer</code>: This is a string of the optimizer file used for the calculation. These files can be found in the <code>structopt/optimizers</code> folder. Upon run, a copy of this script is placed insde of the <code>calcdir</code> directory and accessed from there.</li>
+
+<li><code>StructOpt_parameters</code>: This is a dictionary object that should mirror the input file you are trying to submit</li>
+
+<li><code>submit_parameters</code>: This dictionary holds the submit parameters. These will be specific to the queue system in use. In this example, we specify the the submission system, queue, number of nodes, number of cores, and walltime.</li>
+</ol>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #0000FF;">from</span> structopt.utilities.job_manager <span style="color: #0000FF;">import</span> JobManager
+<span style="color: #0000FF;">from</span> structopt.utilities.exceptions <span style="color: #0000FF;">import</span> Running, Submitted, Queued
+
+<span style="color: #BA36A5;">calcdir</span> = <span style="color: #008000;">'job_manager_examples/Au55-example'</span>
+
+<span style="color: #BA36A5;">LAMMPS_parameters</span> = {<span style="color: #008000;">"use_mpi4py"</span>: <span style="color: #D0372D;">True</span>,
+                     <span style="color: #008000;">"MPMD"</span>: 0,
+                     <span style="color: #008000;">"keep_files"</span>: <span style="color: #D0372D;">False</span>,
+                     <span style="color: #008000;">"min_style"</span>: <span style="color: #008000;">"cg"</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span><span style="color: #008000;">"min_modify"</span>: <span style="color: #008000;">"line quadratic"</span>,
+                     <span style="color: #008000;">"minimize"</span>: <span style="color: #008000;">"1e-8 1e-8 5000 10000"</span>,
+                     <span style="color: #008000;">"pair_style"</span>: <span style="color: #008000;">"eam"</span>,
+                     <span style="color: #008000;">"potential_file"</span>: <span style="color: #008000;">"$STRUCTOPT_HOME/potentials/Au_u3.eam"</span>,
+                     <span style="color: #008000;">"thermo_steps"</span>: 0}
+
+<span style="color: #BA36A5;">StructOpt_parameters</span> = {
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"seed"</span>: 0,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"structure_type"</span>: <span style="color: #008000;">"cluster"</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"generators"</span>: {<span style="color: #008000;">"sphere"</span>: {<span style="color: #008000;">"number_of_individuals"</span>: 20,
+                              <span style="color: #008000;">"kwargs"</span>: {<span style="color: #008000;">"atomlist"</span>: [[<span style="color: #008000;">"Au"</span>, 55]],
+                                         <span style="color: #008000;">"cell"</span>: [20, 20, 20]}}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"fitnesses"</span>: {<span style="color: #008000;">"LAMMPS"</span>: {<span style="color: #008000;">"weight"</span>: 1.0,
+                   <span style="color: #008000;">"kwargs"</span>: LAMMPS_parameters}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"relaxations"</span>: {<span style="color: #008000;">"LAMMPS"</span>: {<span style="color: #008000;">"order"</span>: 0,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>  <span style="color: #008000;">"kwargs"</span>: LAMMPS_parameters}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"convergence"</span>: {<span style="color: #008000;">"max_generations"</span>: 10},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"mutations"</span>: {<span style="color: #008000;">"move_atoms"</span>: {<span style="color: #008000;">"probability"</span>: 0.1},
+                  <span style="color: #008000;">"rotate_cluster"</span>: {<span style="color: #008000;">"probability"</span>: 0.1}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"crossovers"</span>: {<span style="color: #008000;">"rotate"</span>: {<span style="color: #008000;">"probability"</span>: 0.7}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"predators"</span>: {<span style="color: #008000;">"best"</span>: {<span style="color: #008000;">"probability"</span>: 1.0}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"selections"</span>: {<span style="color: #008000;">"rank"</span>: {<span style="color: #008000;">"probability"</span>: 1.0,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"kwargs"</span>: {<span style="color: #008000;">"unique_pairs"</span>: <span style="color: #D0372D;">False</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>  <span style="color: #008000;">"unique_parents"</span>: <span style="color: #D0372D;">False</span>}}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"fingerprinters"</span>: {<span style="color: #008000;">"keep_best"</span>: <span style="color: #D0372D;">True</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>  <span style="color: #008000;">"diversify_module"</span>: {<span style="color: #008000;">"probability"</span>: 1.0,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"kwargs"</span>: {<span style="color: #008000;">"module"</span>: <span style="color: #008000;">"LAMMPS"</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>  <span style="color: #008000;">"min_diff"</span>: 0.001}}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"post_processing"</span>: {<span style="color: #008000;">"XYZs"</span>: -1},
+}
+
+<span style="color: #BA36A5;">submit_parameters</span> = {<span style="color: #008000;">'system'</span>: <span style="color: #008000;">'PBS'</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span><span style="color: #008000;">'queue'</span>: <span style="color: #008000;">'morgan2'</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span><span style="color: #008000;">'nodes'</span>: 1,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span><span style="color: #008000;">'cores'</span>: 12,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span><span style="color: #008000;">'walltime'</span>: 12}
+
+<span style="color: #BA36A5;">optimizer</span> = <span style="color: #008000;">'genetic.py'</span>
+
+<span style="color: #BA36A5;">job</span> = JobManager(calcdir, optimizer, StructOpt_parameters, submit_parameters)
+job.optimize()
+</pre>
+</div>
+
+<p>
+Upon running this script, the user should get back an exception called <code>structopt.utilities.exceptions.Submitted</code> with the jobid. This is normal behavior and communicates that the job has successfully been submitted.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="sec-submit-multiple"><a id="orgheadline4"></a>Multiple jobs</h3>
+<div class="outline-text-3" id="text-sec-submit-multiple">
+<p>
+One advantage of the job manager is that it allows one to submit multiple jobs to the queue. This is often useful for tuning the optimizer against different inputs. The script below is an example of submitting the same job at different seeds.
+</p>
+
+<p>
+In the previous script, submitting a single job successfully with <code>JobManager.optimizer</code> method resulted in an exception. We can catch this exception with a <code>try</code> and <b>except</b> statement. This is shown below in the script where upon a successful submission, the script prints out the jobid to the user.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #0000FF;">from</span> structopt.utilities.job_manager <span style="color: #0000FF;">import</span> JobManager
+<span style="color: #0000FF;">from</span> structopt.utilities.exceptions <span style="color: #0000FF;">import</span> Running, Submitted, Queued
+
+<span style="color: #BA36A5;">LAMMPS_parameters</span> = {<span style="color: #008000;">"use_mpi4py"</span>: <span style="color: #D0372D;">True</span>,
+                     <span style="color: #008000;">"MPMD"</span>: 0,
+                     <span style="color: #008000;">"keep_files"</span>: <span style="color: #D0372D;">False</span>,
+                     <span style="color: #008000;">"min_style"</span>: <span style="color: #008000;">"cg"</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span><span style="color: #008000;">"min_modify"</span>: <span style="color: #008000;">"line quadratic"</span>,
+                     <span style="color: #008000;">"minimize"</span>: <span style="color: #008000;">"1e-8 1e-8 5000 10000"</span>,
+                     <span style="color: #008000;">"pair_style"</span>: <span style="color: #008000;">"eam"</span>,
+                     <span style="color: #008000;">"potential_file"</span>: <span style="color: #008000;">"$STRUCTOPT_HOME/potentials/Au_u3.eam"</span>,
+                     <span style="color: #008000;">"thermo_steps"</span>: 0}
+
+<span style="color: #BA36A5;">StructOpt_parameters</span> = {
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"seed"</span>: 0,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"structure_type"</span>: <span style="color: #008000;">"cluster"</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"generators"</span>: {<span style="color: #008000;">"sphere"</span>: {<span style="color: #008000;">"number_of_individuals"</span>: 20,
+                              <span style="color: #008000;">"kwargs"</span>: {<span style="color: #008000;">"atomlist"</span>: [[<span style="color: #008000;">"Au"</span>, 55]],
+                                         <span style="color: #008000;">"cell"</span>: [20, 20, 20]}}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"fitnesses"</span>: {<span style="color: #008000;">"LAMMPS"</span>: {<span style="color: #008000;">"weight"</span>: 1.0,
+                   <span style="color: #008000;">"kwargs"</span>: LAMMPS_parameters}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"relaxations"</span>: {<span style="color: #008000;">"LAMMPS"</span>: {<span style="color: #008000;">"order"</span>: 0,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>  <span style="color: #008000;">"kwargs"</span>: LAMMPS_parameters}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"convergence"</span>: {<span style="color: #008000;">"max_generations"</span>: 10},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"mutations"</span>: {<span style="color: #008000;">"move_atoms"</span>: {<span style="color: #008000;">"probability"</span>: 0.1},
+                  <span style="color: #008000;">"rotate_cluster"</span>: {<span style="color: #008000;">"probability"</span>: 0.1}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"crossovers"</span>: {<span style="color: #008000;">"rotate"</span>: {<span style="color: #008000;">"probability"</span>: 0.7}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"predators"</span>: {<span style="color: #008000;">"best"</span>: {<span style="color: #008000;">"probability"</span>: 1.0}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"selections"</span>: {<span style="color: #008000;">"rank"</span>: {<span style="color: #008000;">"probability"</span>: 1.0,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"kwargs"</span>: {<span style="color: #008000;">"unique_pairs"</span>: <span style="color: #D0372D;">False</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>  <span style="color: #008000;">"unique_parents"</span>: <span style="color: #D0372D;">False</span>}}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"fingerprinters"</span>: {<span style="color: #008000;">"keep_best"</span>: <span style="color: #D0372D;">True</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>  <span style="color: #008000;">"diversify_module"</span>: {<span style="color: #008000;">"probability"</span>: 1.0,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"kwargs"</span>: {<span style="color: #008000;">"module"</span>: <span style="color: #008000;">"LAMMPS"</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>  <span style="color: #008000;">"min_diff"</span>: 0.001}}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"post_processing"</span>: {<span style="color: #008000;">"XYZs"</span>: -1},
+}
+
+<span style="color: #BA36A5;">submit_parameters</span> = {<span style="color: #008000;">'system'</span>: <span style="color: #008000;">'PBS'</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span><span style="color: #008000;">'queue'</span>: <span style="color: #008000;">'morgan2'</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span><span style="color: #008000;">'nodes'</span>: 1,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span><span style="color: #008000;">'cores'</span>: 12,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span><span style="color: #008000;">'walltime'</span>: 12}
+
+<span style="color: #BA36A5;">optimizer</span> = <span style="color: #008000;">'genetic.py'</span>
+
+<span style="color: #BA36A5;">seeds</span> = [0, 1, 2, 3, 4]
+<span style="color: #0000FF;">for</span> seed <span style="color: #0000FF;">in</span> seeds:
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #BA36A5;">StructOpt_parameters</span>[<span style="color: #008000;">'seed'</span>] = seed
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #BA36A5;">calcdir</span> = <span style="color: #008000;">'job_manager_examples/Au55-seed-{}'</span>.<span style="color: #006FE0;">format</span>(seed)
+
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #BA36A5;">job</span> = JobManager(calcdir, optimizer, StructOpt_parameters, submit_parameters)
+
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #0000FF;">try</span>:
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   job.optimize()
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #0000FF;">except</span> Submitted:
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #0000FF;">print</span>(calcdir, job.get_jobid(), <span style="color: #008000;">'submitted'</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="sec-track"><a id="orgheadline6"></a>Tracking jobs</h2>
+<div class="outline-text-2" id="text-sec-track">
+<p>
+In the previous section, we covered how to submit a new job from an empty directory. This is done by first initializing an instance of the <code>StructOpt.utilities.job_manager.Job</code> class with a calculation directory along with some input files and then submitting the job with the <code>Job.optimize</code> method. The <code>Job.optimize</code> method knows what to do because upon initialization, it detected an empty directory. If the directory was not empty and contained a StructOpt job, the job<sub>manager</sub> knows what to do with it if <code>Job.optimize</code> was run again. This is all done with exceptions.
+</p>
+
+<p>
+The three primary exceptions that are returned upon executing the <code>Job.optimize</code> method are below along with their reasoning.
+</p>
+
+<ol class="org-ol">
+<li><code>Submitted</code>: This exception is returned if a job is submitted from the directory. This is done when <code>Job.optimize</code> is called in an empty directory or <code>Job.optimize</code> is called with the kwarg <code>restart=True</code> in a directory that is not <code>Queued</code> or <code>Running</code>.</li>
+
+<li><code>Queued</code>: The job is queued and has not started running. There should be no output files to be analyzed.</li>
+
+<li><code>Running</code>: The job is running and output files should be continously be updated. These output files can be used for analysis before the job has finished running.</li>
+
+<li><code>UnknownState</code>: This is returned if the <code>calcdir</code> is not an empty directory doesn't detect it as a StructOpt run.</li>
+</ol>
+
+<p>
+Note that if no exception is returned, it means the job is done and is ready to be analyzed. <code>Job.optimize</code> does nothing in this case.
+</p>
+
+<p>
+One way of using these three exceptions is below. If the job is submitted or Queued, we want the script to stop and not submit the job. If it is running, additional commands can be used to track the progress of the job. This is done through the <code>DataExplorer</code> module.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #0000FF;">from</span> structopt.utilities.job_manager <span style="color: #0000FF;">import</span> JobManager
+<span style="color: #0000FF;">from</span> structopt.utilities.exceptions <span style="color: #0000FF;">import</span> Running, Submitted, Queued
+
+<span style="color: #BA36A5;">calcdir</span> = <span style="color: #008000;">'job_manager_examples/Au55-example'</span>
+
+<span style="color: #BA36A5;">LAMMPS_parameters</span> = {<span style="color: #008000;">"use_mpi4py"</span>: <span style="color: #D0372D;">True</span>,
+                     <span style="color: #008000;">"MPMD"</span>: 0,
+                     <span style="color: #008000;">"keep_files"</span>: <span style="color: #D0372D;">False</span>,
+                     <span style="color: #008000;">"min_style"</span>: <span style="color: #008000;">"cg"</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span><span style="color: #008000;">"min_modify"</span>: <span style="color: #008000;">"line quadratic"</span>,
+                     <span style="color: #008000;">"minimize"</span>: <span style="color: #008000;">"1e-8 1e-8 5000 10000"</span>,
+                     <span style="color: #008000;">"pair_style"</span>: <span style="color: #008000;">"eam"</span>,
+                     <span style="color: #008000;">"potential_file"</span>: <span style="color: #008000;">"$STRUCTOPT_HOME/potentials/Au_u3.eam"</span>,
+                     <span style="color: #008000;">"thermo_steps"</span>: 0}
+
+<span style="color: #BA36A5;">StructOpt_parameters</span> = {
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"seed"</span>: 0,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"structure_type"</span>: <span style="color: #008000;">"cluster"</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"generators"</span>: {<span style="color: #008000;">"sphere"</span>: {<span style="color: #008000;">"number_of_individuals"</span>: 20,
+                              <span style="color: #008000;">"kwargs"</span>: {<span style="color: #008000;">"atomlist"</span>: [[<span style="color: #008000;">"Au"</span>, 55]],
+                                         <span style="color: #008000;">"cell"</span>: [20, 20, 20]}}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"fitnesses"</span>: {<span style="color: #008000;">"LAMMPS"</span>: {<span style="color: #008000;">"weight"</span>: 1.0,
+                   <span style="color: #008000;">"kwargs"</span>: LAMMPS_parameters}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"relaxations"</span>: {<span style="color: #008000;">"LAMMPS"</span>: {<span style="color: #008000;">"order"</span>: 0,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>  <span style="color: #008000;">"kwargs"</span>: LAMMPS_parameters}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"convergence"</span>: {<span style="color: #008000;">"max_generations"</span>: 10},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"mutations"</span>: {<span style="color: #008000;">"move_atoms"</span>: {<span style="color: #008000;">"probability"</span>: 0.1},
+                  <span style="color: #008000;">"rotate_cluster"</span>: {<span style="color: #008000;">"probability"</span>: 0.1}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"crossovers"</span>: {<span style="color: #008000;">"rotate"</span>: {<span style="color: #008000;">"probability"</span>: 0.7}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"predators"</span>: {<span style="color: #008000;">"best"</span>: {<span style="color: #008000;">"probability"</span>: 1.0}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"selections"</span>: {<span style="color: #008000;">"rank"</span>: {<span style="color: #008000;">"probability"</span>: 1.0,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"kwargs"</span>: {<span style="color: #008000;">"unique_pairs"</span>: <span style="color: #D0372D;">False</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>  <span style="color: #008000;">"unique_parents"</span>: <span style="color: #D0372D;">False</span>}}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"fingerprinters"</span>: {<span style="color: #008000;">"keep_best"</span>: <span style="color: #D0372D;">True</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>  <span style="color: #008000;">"diversify_module"</span>: {<span style="color: #008000;">"probability"</span>: 1.0,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"kwargs"</span>: {<span style="color: #008000;">"module"</span>: <span style="color: #008000;">"LAMMPS"</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>  <span style="color: #008000;">"min_diff"</span>: 0.001}}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"post_processing"</span>: {<span style="color: #008000;">"XYZs"</span>: -1},
+}
+
+<span style="color: #BA36A5;">submit_parameters</span> = {<span style="color: #008000;">'system'</span>: <span style="color: #008000;">'PBS'</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span><span style="color: #008000;">'queue'</span>: <span style="color: #008000;">'morgan2'</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span><span style="color: #008000;">'nodes'</span>: 1,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span><span style="color: #008000;">'cores'</span>: 12,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span><span style="color: #008000;">'walltime'</span>: 12}
+
+<span style="color: #BA36A5;">optimizer</span> = <span style="color: #008000;">'genetic.py'</span>
+
+<span style="color: #BA36A5;">job</span> = JobManager(calcdir, optimizer, StructOpt_parameters, submit_parameters)
+<span style="color: #0000FF;">try</span>:
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   job.optimize()
+<span style="color: #0000FF;">except</span> (Submitted, Queued):
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #0000FF;">print</span>(calcdir, job.get_jobid(), <span style="color: #008000;">'submitted or queued'</span>)
+<span style="color: #0000FF;">except</span> Running:
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #0000FF;">pass</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="sec-restart"><a id="orgheadline7"></a>Restarting jobs</h2>
+<div class="outline-text-2" id="text-sec-restart">
+<p>
+Sometimes jobs need to be restarted or continued from the last generation. The <b>JobManager</b> does this by submitting a new job from the same <code>calcdir</code> folder the previous job was run in. Because calculations take place in unique <b>log{time}</b> directories, the job will run in a new updated <b>log{time}</b> directory. Furthermore, the <b>JobManager</b> modifies the <b>structopt.in.json</b> file so the initial population of the new job are the XYZ files of the last generation of the previous run. Finally, a new input file is based on the <code>StructOpt_parameters</code> variable given to the optimizer. The code below is an example of restarting the first run of this example. The only difference between this code and the one presented in <a href="#sec-submit-single">sec-submit-single</a> is that a <code>restart=True</code> kwarg has been added to the <code>Job.optimize</code> command.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #0000FF;">from</span> structopt.utilities.job_manager <span style="color: #0000FF;">import</span> JobManager
+<span style="color: #0000FF;">from</span> structopt.utilities.exceptions <span style="color: #0000FF;">import</span> Running, Submitted, Queued
+
+<span style="color: #BA36A5;">calcdir</span> = <span style="color: #008000;">'job_manager_examples/Au55-example'</span>
+
+<span style="color: #BA36A5;">LAMMPS_parameters</span> = {<span style="color: #008000;">"use_mpi4py"</span>: <span style="color: #D0372D;">True</span>,
+                     <span style="color: #008000;">"MPMD"</span>: 0,
+                     <span style="color: #008000;">"keep_files"</span>: <span style="color: #D0372D;">False</span>,
+                     <span style="color: #008000;">"min_style"</span>: <span style="color: #008000;">"cg"</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span><span style="color: #008000;">"min_modify"</span>: <span style="color: #008000;">"line quadratic"</span>,
+                     <span style="color: #008000;">"minimize"</span>: <span style="color: #008000;">"1e-8 1e-8 5000 10000"</span>,
+                     <span style="color: #008000;">"pair_style"</span>: <span style="color: #008000;">"eam"</span>,
+                     <span style="color: #008000;">"potential_file"</span>: <span style="color: #008000;">"$STRUCTOPT_HOME/potentials/Au_u3.eam"</span>,
+                     <span style="color: #008000;">"thermo_steps"</span>: 0}
+
+<span style="color: #BA36A5;">StructOpt_parameters</span> = {
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"seed"</span>: 0,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"structure_type"</span>: <span style="color: #008000;">"cluster"</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"generators"</span>: {<span style="color: #008000;">"sphere"</span>: {<span style="color: #008000;">"number_of_individuals"</span>: 20,
+                              <span style="color: #008000;">"kwargs"</span>: {<span style="color: #008000;">"atomlist"</span>: [[<span style="color: #008000;">"Au"</span>, 55]],
+                                         <span style="color: #008000;">"cell"</span>: [20, 20, 20]}}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"fitnesses"</span>: {<span style="color: #008000;">"LAMMPS"</span>: {<span style="color: #008000;">"weight"</span>: 1.0,
+                   <span style="color: #008000;">"kwargs"</span>: LAMMPS_parameters}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"relaxations"</span>: {<span style="color: #008000;">"LAMMPS"</span>: {<span style="color: #008000;">"order"</span>: 0,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>  <span style="color: #008000;">"kwargs"</span>: LAMMPS_parameters}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"convergence"</span>: {<span style="color: #008000;">"max_generations"</span>: 10},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"mutations"</span>: {<span style="color: #008000;">"move_atoms"</span>: {<span style="color: #008000;">"probability"</span>: 0.1},
+                  <span style="color: #008000;">"rotate_cluster"</span>: {<span style="color: #008000;">"probability"</span>: 0.1}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"crossovers"</span>: {<span style="color: #008000;">"rotate"</span>: {<span style="color: #008000;">"probability"</span>: 0.7}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"predators"</span>: {<span style="color: #008000;">"best"</span>: {<span style="color: #008000;">"probability"</span>: 1.0}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"selections"</span>: {<span style="color: #008000;">"rank"</span>: {<span style="color: #008000;">"probability"</span>: 1.0,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"kwargs"</span>: {<span style="color: #008000;">"unique_pairs"</span>: <span style="color: #D0372D;">False</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>  <span style="color: #008000;">"unique_parents"</span>: <span style="color: #D0372D;">False</span>}}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"fingerprinters"</span>: {<span style="color: #008000;">"keep_best"</span>: <span style="color: #D0372D;">True</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>  <span style="color: #008000;">"diversify_module"</span>: {<span style="color: #008000;">"probability"</span>: 1.0,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"kwargs"</span>: {<span style="color: #008000;">"module"</span>: <span style="color: #008000;">"LAMMPS"</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>  <span style="color: #008000;">"min_diff"</span>: 0.001}}},
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #008000;">"post_processing"</span>: {<span style="color: #008000;">"XYZs"</span>: -1},
+}
+
+<span style="color: #BA36A5;">submit_parameters</span> = {<span style="color: #008000;">'system'</span>: <span style="color: #008000;">'PBS'</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span><span style="color: #008000;">'queue'</span>: <span style="color: #008000;">'morgan2'</span>,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span><span style="color: #008000;">'nodes'</span>: 1,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span><span style="color: #008000;">'cores'</span>: 12,
+<span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span>   <span style="color: #9B9B9B; background-color: #EDEDED;"> </span><span style="color: #008000;">'walltime'</span>: 12}
+
+<span style="color: #BA36A5;">optimizer</span> = <span style="color: #008000;">'genetic.py'</span>
+
+<span style="color: #BA36A5;">job</span> = JobManager(calcdir, optimizer, StructOpt_parameters, submit_parameters)
+job.optimize(restart=<span style="color: #D0372D;">True</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Zhongnan Xu</p>
+<p class="date">Created: 2017-01-23 Mon 13:10</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

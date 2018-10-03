@@ -1,0 +1,24 @@
+# (written by ASE)
+clear
+variable dump_file string "/tmp/LAMMPS-ojshcmgr/trj.lammps"
+variable data_file string "/tmp/LAMMPS-ojshcmgr/data.lammps"
+units metal 
+boundary s s s 
+read_data /tmp/LAMMPS-ojshcmgr/data.lammps
+
+### interactions 
+pair_style eam
+pair_coeff * * /home/maldonis/repos/StructOpt_modular/potentials/Au_u3.eam
+thermo_style custom step temp press cpu pxx pyy pzz pxy pxz pyz ke pe etotal vol lx ly lz atoms
+thermo_modify flush yes
+thermo 0
+
+### Relaxation 
+fix fix_nve all nve
+min_style cg
+min_modify line quadratic
+minimize 1e-8 1e-8 5000 10000
+compute pea all pe/atom
+dump dump_all all custom 2 /tmp/LAMMPS-ojshcmgr/trj.lammps id type x y z c_pea
+run 1
+print __end_of_ase_invoked_calculation__

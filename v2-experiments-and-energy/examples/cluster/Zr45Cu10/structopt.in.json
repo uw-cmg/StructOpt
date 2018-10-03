@@ -1,0 +1,62 @@
+{
+    "seed": 0,
+    "logging": { },
+    "structure_type": "cluster",
+    "generators": {
+	"fcc": {"number_of_individuals": 5,
+		"kwargs": {"atomlist": [["Cu", 45],
+                                        ["Zr", 10]],
+                           "orientation": "100",
+			   "cell": [20, 20, 20],
+                           "a": 4.08}}
+    },
+    "fitnesses": {
+        "LAMMPS": {"weight": 1.0, 
+	           "kwargs": {"use_mpi4py": false,
+	                      "MPMD": 0,
+	                      "keep_files": true,
+	                      "min_style": "cg",
+                              "min_modify": "line quadratic",
+	                      "minimize": "1e-8 1e-8 5000 10000",
+	                      "pair_style": "eam/alloy",
+	                      "potential_file": "$STRUCTOPT_HOME/potentials/ZrCu.lammps.eam",
+	                      "thermo_steps": 0}}
+    },
+    "relaxations": {
+        "LAMMPS": {"order": 0,
+                   "kwargs": {"use_mpi4py": false,
+	                      "MPMD": 0,
+	                      "keep_files": true,
+	                      "min_style": "cg",
+                              "min_modify": "line quadratic",
+	                      "minimize": "1e-8 1e-8 5000 10000",
+	                      "pair_style": "eam/alloy",
+	                      "potential_file": "$STRUCTOPT_HOME/potentials/ZrCu.lammps.eam",
+	                      "thermo_steps": 0}}
+    },
+    "convergence": {
+        "max_generations": 10
+    },
+    "mutations": {
+        "enrich_bulk": {"probability": 0.16},
+        "enrich_surface": {"probability": 0.16},
+        "enrich_surface_defects": {"probability": 0.16},
+        "enrich_surface_facets": {"probability": 0.16},
+        "poor2rich": {"probability": 0.16},
+        "rich2poor": {"probability": 0.16}
+    },
+    "fingerprinters": {
+        "options": []
+    },
+    "crossovers": {
+        "rotate": {"probability": 0.7}
+    },
+    "predators": {
+        "fuss": {"probability": 1.0}
+    },
+    "selections": {
+        "rank": {"probability": 1.0}
+    },
+    "fileio": {},
+    "tools": {}
+}

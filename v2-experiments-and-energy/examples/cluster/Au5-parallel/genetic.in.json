@@ -1,0 +1,72 @@
+{
+    "seed": 0,
+    "logging": { },
+    "post_processing": {
+        "XYZs": 1
+    },
+    "structure_type": "cluster",
+    "generators": {
+        "read_xyz": {"number_of_individuals": 4,
+             "kwargs": ["structure1.xyz",
+                "structure2.xyz",
+                "structure3.xyz",
+                "structure4.xyz",
+                "structure5.xyz"]},
+    "sphere": {"number_of_individuals": 8,
+           "kwargs": {"atomlist": [["Au", 5]],
+                  "cell": [10, 10, 10],
+                  "fill_factor": 0.4}}
+    },
+    "fitnesses": {
+        "LAMMPS": {"weight": 1.0,
+               "kwargs": {"use_mpi4py": true,
+                          "MPMD": 0,
+                          "keep_files": false,
+                          "min_style": "cg",
+                              "min_modify": "line quadratic",
+                          "minimize": "1e-8 1e-8 5000 10000",
+                          "pair_style": "eam",
+                          "potential_file": "$STRUCTOPT_HOME/potentials/Au_u3.eam",
+                          "thermo_steps": 0}}
+    },
+    "relaxations": {
+        "LAMMPS": {"order": 0,
+                   "kwargs": {"use_mpi4py": true,
+                          "MPMD": 0,
+                          "keep_files": false,
+                          "min_style": "cg",
+                              "min_modify": "line quadratic",
+                          "minimize": "1e-8 1e-8 5000 10000",
+                          "pair_style": "eam",
+                          "potential_file": "$STRUCTOPT_HOME/potentials/Au_u3.eam",
+                          "thermo_steps": 0}}
+    },
+    "convergence": {
+        "max_generations": 5
+    },
+    "mutations": {
+        "move_atoms": {"probability": 0.5},
+        "swap_positions": {"probability": 0.0},
+        "swap_species": {"probability": 0.0},
+        "rotate_atoms": {"probability": 0.3},
+        "rotate_cluster": {"probability": 0.0}
+    },
+    "fingerprinters": {
+        "options": []
+    },
+    "crossovers": {
+        "rotate": {"probability": 1.0}
+    },
+    "predators": {
+        "best": {"probability": 1.0}
+    },
+    "selections": {
+        "rank": {"probability": 1.0,
+                 "kwargs": {"unique_pairs": false,
+                            "unique_parents": false}},
+        "random_selection": {"probability": 0.0}
+    },
+    "fileio": {},
+    "postprocessing": {},
+    "tools": {}
+}

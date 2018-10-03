@@ -1,0 +1,106 @@
+{
+    "convergence": {
+        "max_generations": 10
+    },
+    "crossovers": {
+        "rotate": {
+            "probability": 0.7
+        }
+    },
+    "fingerprinters": {
+        "diversify_module": {
+            "kwargs": {
+                "min_diff": 0.001,
+                "module": "LAMMPS"
+            },
+            "probability": 1.0
+        },
+        "keep_best": true
+    },
+    "fitnesses": {
+        "LAMMPS": {
+            "kwargs": {
+                "MPMD": 0,
+                "keep_files": false,
+                "min_modify": "line quadratic",
+                "min_style": "cg",
+                "minimize": "1e-8 1e-8 5000 10000",
+                "pair_style": "eam",
+                "potential_file": "$STRUCTOPT_HOME/potentials/Au_u3.eam",
+                "thermo_steps": 0,
+                "use_mpi4py": true
+            },
+            "weight": 1.0
+        }
+    },
+    "generators": {
+        "read_extxyz": {
+            "kwargs": [
+                "/home/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Au55-example/logs20170120035711/XYZs/generation10/individual38.xyz",
+                "/home/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Au55-example/logs20170120035711/XYZs/generation10/individual110.xyz",
+                "/home/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Au55-example/logs20170120035711/XYZs/generation10/individual99.xyz",
+                "/home/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Au55-example/logs20170120035711/XYZs/generation10/individual57.xyz",
+                "/home/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Au55-example/logs20170120035711/XYZs/generation10/individual86.xyz",
+                "/home/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Au55-example/logs20170120035711/XYZs/generation10/individual143.xyz",
+                "/home/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Au55-example/logs20170120035711/XYZs/generation10/individual133.xyz",
+                "/home/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Au55-example/logs20170120035711/XYZs/generation10/individual111.xyz",
+                "/home/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Au55-example/logs20170120035711/XYZs/generation10/individual91.xyz",
+                "/home/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Au55-example/logs20170120035711/XYZs/generation10/individual131.xyz",
+                "/home/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Au55-example/logs20170120035711/XYZs/generation10/individual118.xyz",
+                "/home/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Au55-example/logs20170120035711/XYZs/generation10/individual88.xyz",
+                "/home/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Au55-example/logs20170120035711/XYZs/generation10/individual152.xyz",
+                "/home/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Au55-example/logs20170120035711/XYZs/generation10/individual47.xyz",
+                "/home/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Au55-example/logs20170120035711/XYZs/generation10/individual122.xyz",
+                "/home/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Au55-example/logs20170120035711/XYZs/generation10/individual18.xyz",
+                "/home/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Au55-example/logs20170120035711/XYZs/generation10/individual30.xyz",
+                "/home/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Au55-example/logs20170120035711/XYZs/generation10/individual49.xyz",
+                "/home/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Au55-example/logs20170120035711/XYZs/generation10/individual136.xyz",
+                "/home/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Au55-example/logs20170120035711/XYZs/generation10/individual121.xyz"
+            ],
+            "number_of_individuals": 20
+        }
+    },
+    "mutations": {
+        "move_atoms": {
+            "probability": 0.1
+        },
+        "rotate_cluster": {
+            "probability": 0.1
+        }
+    },
+    "post_processing": {
+        "XYZs": -1
+    },
+    "predators": {
+        "best": {
+            "probability": 1.0
+        }
+    },
+    "relaxations": {
+        "LAMMPS": {
+            "kwargs": {
+                "MPMD": 0,
+                "keep_files": false,
+                "min_modify": "line quadratic",
+                "min_style": "cg",
+                "minimize": "1e-8 1e-8 5000 10000",
+                "pair_style": "eam",
+                "potential_file": "$STRUCTOPT_HOME/potentials/Au_u3.eam",
+                "thermo_steps": 0,
+                "use_mpi4py": true
+            },
+            "order": 0
+        }
+    },
+    "seed": 0,
+    "selections": {
+        "rank": {
+            "kwargs": {
+                "unique_pairs": false,
+                "unique_parents": false
+            },
+            "probability": 1.0
+        }
+    },
+    "structure_type": "cluster"
+}

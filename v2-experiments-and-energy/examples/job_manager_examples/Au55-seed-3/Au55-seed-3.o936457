@@ -1,0 +1,693 @@
+discarding /home/zxu/anaconda2/bin from PATH
+prepending /home/zxu/anaconda2/envs/py35/bin to PATH
+discarding /home/zxu/anaconda2/envs/py35/bin from PATH
+prepending /home/zxu/anaconda2/envs/py35/bin to PATH
+Relaxing individual 8 on rank 8 with LAMMPS
+Relaxing individual 10 on rank 10 with LAMMPS
+Relaxing individual 6 on rank 6 with LAMMPS
+Relaxing individual 4 on rank 4 with LAMMPS
+Relaxing individual 2 on rank 2 with LAMMPS
+Starting main Opimizer loop!
+
+Starting generation 0
+Running relaxation LAMMPS on the entire population
+Relaxing individual 0 on rank 0 with LAMMPS
+Relaxing individual 7 on rank 7 with LAMMPS
+Relaxing individual 5 on rank 5 with LAMMPS
+Relaxing individual 11 on rank 11 with LAMMPS
+Relaxing individual 1 on rank 1 with LAMMPS
+Relaxing individual 3 on rank 3 with LAMMPS
+Relaxing individual 9 on rank 9 with LAMMPS
+Finished relaxing individual 8 on rank 8 with LAMMPS
+Finished relaxing individual 1 on rank 1 with LAMMPS
+Relaxing individual 13 on rank 1 with LAMMPS
+Finished relaxing individual 2 on rank 2 with LAMMPS
+Relaxing individual 14 on rank 2 with LAMMPS
+Finished relaxing individual 6 on rank 6 with LAMMPS
+Relaxing individual 18 on rank 6 with LAMMPS
+Finished relaxing individual 3 on rank 3 with LAMMPS
+Relaxing individual 15 on rank 3 with LAMMPS
+Finished relaxing individual 10 on rank 10 with LAMMPS
+Finished relaxing individual 0 on rank 0 with LAMMPS
+Finished relaxing individual 4 on rank 4 with LAMMPS
+Relaxing individual 12 on rank 0 with LAMMPS
+Relaxing individual 16 on rank 4 with LAMMPS
+Finished relaxing individual 13 on rank 1 with LAMMPS
+Finished relaxing individual 12 on rank 0 with LAMMPS
+Finished relaxing individual 15 on rank 3 with LAMMPS
+Finished relaxing individual 14 on rank 2 with LAMMPS
+Finished relaxing individual 16 on rank 4 with LAMMPS
+Finished relaxing individual 18 on rank 6 with LAMMPS
+Finished relaxing individual 11 on rank 11 with LAMMPS
+Finished relaxing individual 7 on rank 7 with LAMMPS
+Relaxing individual 19 on rank 7 with LAMMPS
+Finished relaxing individual 19 on rank 7 with LAMMPS
+Finished relaxing individual 9 on rank 9 with LAMMPS
+Finished relaxing individual 5 on rank 5 with LAMMPS
+Relaxing individual 17 on rank 5 with LAMMPS
+Finished relaxing individual 17 on rank 5 with LAMMPS
+Running LAMMPS fitness evaluation on individual 5
+Running LAMMPS fitness evaluation on individual 7
+Running LAMMPS fitness evaluation on individual 8
+Running LAMMPS fitness evaluation on individual 9
+Running LAMMPS fitness evaluation on individual 17
+Running LAMMPS fitness evaluation on individual 11
+Running LAMMPS fitness evaluation on individual 19
+Running LAMMPS fitness evaluation on individual 6
+Running LAMMPS fitness evaluation on individual 4
+Running LAMMPS fitness evaluation on individual 3
+Running LAMMPS fitness evaluation on individual 1
+Running LAMMPS fitness evaluation on individual 2
+Running fitness LAMMPS on the entire population
+Running LAMMPS fitness evaluation on individual 16
+Running LAMMPS fitness evaluation on individual 18
+Running LAMMPS fitness evaluation on individual 0
+Running LAMMPS fitness evaluation on individual 15
+Running LAMMPS fitness evaluation on individual 13
+Running LAMMPS fitness evaluation on individual 10
+Running LAMMPS fitness evaluation on individual 14
+Running LAMMPS fitness evaluation on individual 12
+
+Starting generation 1
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 2> and <Individual 14>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 6> and <Individual 16>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 14> and <Individual 12>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 18> and <Individual 6>
+Performing mutation <function move_atoms at 0x2aaabd7207b8> on individual 6
+Performing mutation None on individual 10
+Performing mutation None on individual 17
+Performing mutation None on individual 23
+Running relaxation LAMMPS on the entire population
+Relaxing individual 6 on rank 0 with LAMMPS
+Relaxing individual 25 on rank 6 with LAMMPS
+Relaxing individual 24 on rank 5 with LAMMPS
+Relaxing individual 27 on rank 8 with LAMMPS
+Relaxing individual 23 on rank 4 with LAMMPS
+Relaxing individual 22 on rank 3 with LAMMPS
+Relaxing individual 26 on rank 7 with LAMMPS
+Relaxing individual 21 on rank 2 with LAMMPS
+Relaxing individual 20 on rank 1 with LAMMPS
+Finished relaxing individual 6 on rank 0 with LAMMPS
+Finished relaxing individual 24 on rank 5 with LAMMPS
+Finished relaxing individual 21 on rank 2 with LAMMPS
+Finished relaxing individual 25 on rank 6 with LAMMPS
+Finished relaxing individual 26 on rank 7 with LAMMPS
+Finished relaxing individual 22 on rank 3 with LAMMPS
+Finished relaxing individual 27 on rank 8 with LAMMPS
+Finished relaxing individual 20 on rank 1 with LAMMPS
+Finished relaxing individual 23 on rank 4 with LAMMPS
+Running LAMMPS fitness evaluation on individual 26
+Running LAMMPS fitness evaluation on individual 25
+Running LAMMPS fitness evaluation on individual 23
+Running LAMMPS fitness evaluation on individual 27
+Running LAMMPS fitness evaluation on individual 22
+Running LAMMPS fitness evaluation on individual 20
+Running fitness LAMMPS on the entire population
+Running LAMMPS fitness evaluation on individual 24
+Running LAMMPS fitness evaluation on individual 6
+Running LAMMPS fitness evaluation on individual 21
+
+Starting generation 2
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 2> and <Individual 11>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 18> and <Individual 20>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 9> and <Individual 11>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 10> and <Individual 11>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 16> and <Individual 23>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 21> and <Individual 19>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 21> and <Individual 6>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 9> and <Individual 23>
+Performing mutation None on individual 1
+Performing mutation <function move_atoms at 0x2aaabd7207b8> on individual 6
+Performing mutation None on individual 8
+Performing mutation None on individual 26
+Performing mutation None on individual 41
+Relaxing individual 33 on rank 6 with LAMMPS
+Running relaxation LAMMPS on the entire population
+Relaxing individual 38 on rank 11 with LAMMPS
+Relaxing individual 31 on rank 4 with LAMMPS
+Relaxing individual 28 on rank 1 with LAMMPS
+Relaxing individual 34 on rank 7 with LAMMPS
+Relaxing individual 32 on rank 5 with LAMMPS
+Relaxing individual 30 on rank 3 with LAMMPS
+Relaxing individual 6 on rank 0 with LAMMPS
+Relaxing individual 35 on rank 8 with LAMMPS
+Relaxing individual 37 on rank 10 with LAMMPS
+Relaxing individual 29 on rank 2 with LAMMPS
+Relaxing individual 36 on rank 9 with LAMMPS
+Finished relaxing individual 38 on rank 11 with LAMMPS
+Finished relaxing individual 30 on rank 3 with LAMMPS
+Relaxing individual 42 on rank 3 with LAMMPS
+Finished relaxing individual 36 on rank 9 with LAMMPS
+Finished relaxing individual 6 on rank 0 with LAMMPS
+Relaxing individual 39 on rank 0 with LAMMPS
+Finished relaxing individual 28 on rank 1 with LAMMPS
+Relaxing individual 40 on rank 1 with LAMMPS
+Finished relaxing individual 37 on rank 10 with LAMMPS
+Finished relaxing individual 42 on rank 3 with LAMMPS
+Finished relaxing individual 34 on rank 7 with LAMMPS
+Finished relaxing individual 40 on rank 1 with LAMMPS
+Finished relaxing individual 39 on rank 0 with LAMMPS
+Finished relaxing individual 32 on rank 5 with LAMMPS
+Finished relaxing individual 33 on rank 6 with LAMMPS
+Finished relaxing individual 35 on rank 8 with LAMMPS
+Finished relaxing individual 29 on rank 2 with LAMMPS
+Relaxing individual 41 on rank 2 with LAMMPS
+Finished relaxing individual 31 on rank 4 with LAMMPS
+Relaxing individual 43 on rank 4 with LAMMPS
+Finished relaxing individual 41 on rank 2 with LAMMPS
+Finished relaxing individual 43 on rank 4 with LAMMPS
+Running LAMMPS fitness evaluation on individual 34
+Running LAMMPS fitness evaluation on individual 33
+Running LAMMPS fitness evaluation on individual 38
+Running LAMMPS fitness evaluation on individual 32
+Running LAMMPS fitness evaluation on individual 31
+Running LAMMPS fitness evaluation on individual 43
+Running LAMMPS fitness evaluation on individual 28
+Running LAMMPS fitness evaluation on individual 40
+Running fitness LAMMPS on the entire population
+Running LAMMPS fitness evaluation on individual 6
+Running LAMMPS fitness evaluation on individual 30
+Running LAMMPS fitness evaluation on individual 42
+Running LAMMPS fitness evaluation on individual 36
+Running LAMMPS fitness evaluation on individual 35
+Running LAMMPS fitness evaluation on individual 29
+Running LAMMPS fitness evaluation on individual 41
+Running LAMMPS fitness evaluation on individual 39
+Running LAMMPS fitness evaluation on individual 37
+
+Starting generation 3
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 18> and <Individual 20>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 18> and <Individual 6>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 21> and <Individual 9>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 38> and <Individual 18>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 18> and <Individual 21>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 18> and <Individual 31>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 6> and <Individual 39>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 18> and <Individual 10>
+Performing mutation None on individual 18
+Performing mutation None on individual 28
+Performing mutation <function rotate_cluster at 0x2aaabd72fc80> on individual 32
+Performing mutation None on individual 37
+Performing mutation None on individual 49
+Performing mutation None on individual 56
+Relaxing individual 54 on rank 11 with LAMMPS
+Relaxing individual 47 on rank 4 with LAMMPS
+Relaxing individual 50 on rank 7 with LAMMPS
+Relaxing individual 46 on rank 3 with LAMMPS
+Relaxing individual 52 on rank 9 with LAMMPS
+Relaxing individual 44 on rank 1 with LAMMPS
+Relaxing individual 49 on rank 6 with LAMMPS
+Relaxing individual 48 on rank 5 with LAMMPS
+Relaxing individual 53 on rank 10 with LAMMPS
+Relaxing individual 51 on rank 8 with LAMMPS
+Relaxing individual 45 on rank 2 with LAMMPS
+Running relaxation LAMMPS on the entire population
+Relaxing individual 32 on rank 0 with LAMMPS
+Finished relaxing individual 50 on rank 7 with LAMMPS
+Finished relaxing individual 54 on rank 11 with LAMMPS
+Finished relaxing individual 32 on rank 0 with LAMMPS
+Relaxing individual 55 on rank 0 with LAMMPS
+Finished relaxing individual 51 on rank 8 with LAMMPS
+Finished relaxing individual 52 on rank 9 with LAMMPS
+Finished relaxing individual 47 on rank 4 with LAMMPS
+Relaxing individual 59 on rank 4 with LAMMPS
+Finished relaxing individual 48 on rank 5 with LAMMPS
+Finished relaxing individual 46 on rank 3 with LAMMPS
+Relaxing individual 58 on rank 3 with LAMMPS
+Finished relaxing individual 44 on rank 1 with LAMMPS
+Relaxing individual 56 on rank 1 with LAMMPS
+Finished relaxing individual 53 on rank 10 with LAMMPS
+Finished relaxing individual 45 on rank 2 with LAMMPS
+Relaxing individual 57 on rank 2 with LAMMPS
+Finished relaxing individual 49 on rank 6 with LAMMPS
+Finished relaxing individual 55 on rank 0 with LAMMPS
+Finished relaxing individual 59 on rank 4 with LAMMPS
+Finished relaxing individual 56 on rank 1 with LAMMPS
+Finished relaxing individual 58 on rank 3 with LAMMPS
+Finished relaxing individual 57 on rank 2 with LAMMPS
+Running LAMMPS fitness evaluation on individual 54
+Running LAMMPS fitness evaluation on individual 50
+Running LAMMPS fitness evaluation on individual 48
+Running LAMMPS fitness evaluation on individual 49
+Running LAMMPS fitness evaluation on individual 46
+Running LAMMPS fitness evaluation on individual 44
+Running LAMMPS fitness evaluation on individual 58
+Running LAMMPS fitness evaluation on individual 56
+Running LAMMPS fitness evaluation on individual 52
+Running LAMMPS fitness evaluation on individual 47
+Running LAMMPS fitness evaluation on individual 59
+Running LAMMPS fitness evaluation on individual 53
+Running fitness LAMMPS on the entire population
+Running LAMMPS fitness evaluation on individual 51
+Running LAMMPS fitness evaluation on individual 32
+Running LAMMPS fitness evaluation on individual 55
+Running LAMMPS fitness evaluation on individual 45
+Running LAMMPS fitness evaluation on individual 57
+
+Starting generation 4
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 51> and <Individual 31>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 23> and <Individual 51>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 21> and <Individual 18>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 51> and <Individual 21>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 47> and <Individual 9>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 46> and <Individual 32>
+Performing mutation None on individual 6
+Performing mutation <function rotate_cluster at 0x2aaabd72fc80> on individual 18
+Performing mutation None on individual 38
+Performing mutation <function move_atoms at 0x2aaabd7207b8> on individual 50
+Performing mutation None on individual 66
+Running relaxation LAMMPS on the entire population
+Relaxing individual 18 on rank 0 with LAMMPS
+Relaxing individual 68 on rank 10 with LAMMPS
+Relaxing individual 64 on rank 6 with LAMMPS
+Relaxing individual 62 on rank 4 with LAMMPS
+Relaxing individual 69 on rank 11 with LAMMPS
+Relaxing individual 66 on rank 8 with LAMMPS
+Relaxing individual 63 on rank 5 with LAMMPS
+Relaxing individual 60 on rank 2 with LAMMPS
+Relaxing individual 67 on rank 9 with LAMMPS
+Relaxing individual 50 on rank 1 with LAMMPS
+Relaxing individual 61 on rank 3 with LAMMPS
+Relaxing individual 65 on rank 7 with LAMMPS
+Finished relaxing individual 18 on rank 0 with LAMMPS
+Relaxing individual 70 on rank 0 with LAMMPS
+Finished relaxing individual 64 on rank 6 with LAMMPS
+Finished relaxing individual 66 on rank 8 with LAMMPS
+Finished relaxing individual 69 on rank 11 with LAMMPS
+Finished relaxing individual 62 on rank 4 with LAMMPS
+Finished relaxing individual 68 on rank 10 with LAMMPS
+Finished relaxing individual 63 on rank 5 with LAMMPS
+Finished relaxing individual 60 on rank 2 with LAMMPS
+Finished relaxing individual 50 on rank 1 with LAMMPS
+Relaxing individual 71 on rank 1 with LAMMPS
+Finished relaxing individual 67 on rank 9 with LAMMPS
+Finished relaxing individual 65 on rank 7 with LAMMPS
+Finished relaxing individual 61 on rank 3 with LAMMPS
+Finished relaxing individual 70 on rank 0 with LAMMPS
+Finished relaxing individual 71 on rank 1 with LAMMPS
+Running LAMMPS fitness evaluation on individual 65
+Running LAMMPS fitness evaluation on individual 69
+Running LAMMPS fitness evaluation on individual 63
+Running LAMMPS fitness evaluation on individual 64
+Running LAMMPS fitness evaluation on individual 61
+Running LAMMPS fitness evaluation on individual 50
+Running LAMMPS fitness evaluation on individual 71
+Running LAMMPS fitness evaluation on individual 67
+Running fitness LAMMPS on the entire population
+Running LAMMPS fitness evaluation on individual 18
+Running LAMMPS fitness evaluation on individual 70
+Running LAMMPS fitness evaluation on individual 68
+Running LAMMPS fitness evaluation on individual 62
+Running LAMMPS fitness evaluation on individual 66
+Running LAMMPS fitness evaluation on individual 60
+
+Starting generation 5
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 32> and <Individual 12>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 68> and <Individual 32>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 38> and <Individual 28>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 51> and <Individual 23>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 44> and <Individual 32>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 55> and <Individual 21>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 51> and <Individual 28>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 44> and <Individual 71>
+Performing mutation None on individual 32
+Performing mutation <function rotate_cluster at 0x2aaabd72fc80> on individual 38
+Performing mutation None on individual 47
+Performing mutation <function move_atoms at 0x2aaabd7207b8> on individual 78
+Performing mutation None on individual 86
+Relaxing individual 82 on rank 11 with LAMMPS
+Relaxing individual 75 on rank 4 with LAMMPS
+Relaxing individual 76 on rank 5 with LAMMPS
+Relaxing individual 77 on rank 6 with LAMMPS
+Relaxing individual 80 on rank 9 with LAMMPS
+Relaxing individual 74 on rank 3 with LAMMPS
+Relaxing individual 72 on rank 1 with LAMMPS
+Relaxing individual 78 on rank 7 with LAMMPS
+Relaxing individual 81 on rank 10 with LAMMPS
+Relaxing individual 79 on rank 8 with LAMMPS
+Relaxing individual 73 on rank 2 with LAMMPS
+Running relaxation LAMMPS on the entire population
+Relaxing individual 38 on rank 0 with LAMMPS
+Finished relaxing individual 75 on rank 4 with LAMMPS
+Finished relaxing individual 38 on rank 0 with LAMMPS
+Relaxing individual 87 on rank 4 with LAMMPS
+Relaxing individual 83 on rank 0 with LAMMPS
+Finished relaxing individual 78 on rank 7 with LAMMPS
+Finished relaxing individual 82 on rank 11 with LAMMPS
+Finished relaxing individual 80 on rank 9 with LAMMPS
+Finished relaxing individual 76 on rank 5 with LAMMPS
+Finished relaxing individual 73 on rank 2 with LAMMPS
+Relaxing individual 85 on rank 2 with LAMMPS
+Finished relaxing individual 77 on rank 6 with LAMMPS
+Finished relaxing individual 81 on rank 10 with LAMMPS
+Finished relaxing individual 79 on rank 8 with LAMMPS
+Finished relaxing individual 72 on rank 1 with LAMMPS
+Relaxing individual 84 on rank 1 with LAMMPS
+Finished relaxing individual 74 on rank 3 with LAMMPS
+Relaxing individual 86 on rank 3 with LAMMPS
+Finished relaxing individual 87 on rank 4 with LAMMPS
+Finished relaxing individual 83 on rank 0 with LAMMPS
+Finished relaxing individual 85 on rank 2 with LAMMPS
+Finished relaxing individual 84 on rank 1 with LAMMPS
+Finished relaxing individual 86 on rank 3 with LAMMPS
+Running LAMMPS fitness evaluation on individual 78
+Running LAMMPS fitness evaluation on individual 76
+Running LAMMPS fitness evaluation on individual 72
+Running LAMMPS fitness evaluation on individual 74
+Running LAMMPS fitness evaluation on individual 86
+Running LAMMPS fitness evaluation on individual 84
+Running LAMMPS fitness evaluation on individual 80
+Running LAMMPS fitness evaluation on individual 82
+Running LAMMPS fitness evaluation on individual 77
+Running fitness LAMMPS on the entire population
+Running LAMMPS fitness evaluation on individual 38
+Running LAMMPS fitness evaluation on individual 75
+Running LAMMPS fitness evaluation on individual 83
+Running LAMMPS fitness evaluation on individual 87
+Running LAMMPS fitness evaluation on individual 79
+Running LAMMPS fitness evaluation on individual 81
+Running LAMMPS fitness evaluation on individual 73
+Running LAMMPS fitness evaluation on individual 85
+
+Starting generation 6
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 32> and <Individual 31>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 28> and <Individual 80>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 28> and <Individual 71>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 66> and <Individual 9>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 44> and <Individual 28>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 44> and <Individual 21>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 44> and <Individual 51>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 9> and <Individual 80>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 32> and <Individual 80>
+Performing mutation None on individual 23
+Performing mutation None on individual 28
+Performing mutation None on individual 31
+Performing mutation <function rotate_cluster at 0x2aaabd72fc80> on individual 32
+Performing mutation <function move_atoms at 0x2aaabd7207b8> on individual 44
+Performing mutation None on individual 46
+Performing mutation None on individual 80
+Performing mutation <function rotate_cluster at 0x2aaabd72fc80> on individual 82
+Performing mutation None on individual 90
+Performing mutation None on individual 92
+Performing mutation None on individual 98
+Performing mutation None on individual 105
+Relaxing individual 96 on rank 11 with LAMMPS
+Relaxing individual 90 on rank 5 with LAMMPS
+Relaxing individual 95 on rank 10 with LAMMPS
+Relaxing individual 44 on rank 1 with LAMMPS
+Relaxing individual 89 on rank 4 with LAMMPS
+Relaxing individual 94 on rank 9 with LAMMPS
+Relaxing individual 92 on rank 7 with LAMMPS
+Relaxing individual 91 on rank 6 with LAMMPS
+Relaxing individual 93 on rank 8 with LAMMPS
+Relaxing individual 82 on rank 2 with LAMMPS
+Relaxing individual 88 on rank 3 with LAMMPS
+Running relaxation LAMMPS on the entire population
+Relaxing individual 32 on rank 0 with LAMMPS
+Finished relaxing individual 88 on rank 3 with LAMMPS
+Relaxing individual 100 on rank 3 with LAMMPS
+Finished relaxing individual 32 on rank 0 with LAMMPS
+Relaxing individual 97 on rank 0 with LAMMPS
+Finished relaxing individual 82 on rank 2 with LAMMPS
+Relaxing individual 99 on rank 2 with LAMMPS
+Finished relaxing individual 91 on rank 6 with LAMMPS
+Relaxing individual 103 on rank 6 with LAMMPS
+Finished relaxing individual 92 on rank 7 with LAMMPS
+Relaxing individual 104 on rank 7 with LAMMPS
+Finished relaxing individual 95 on rank 10 with LAMMPS
+Finished relaxing individual 93 on rank 8 with LAMMPS
+Relaxing individual 105 on rank 8 with LAMMPS
+Finished relaxing individual 94 on rank 9 with LAMMPS
+Finished relaxing individual 44 on rank 1 with LAMMPS
+Relaxing individual 98 on rank 1 with LAMMPS
+Finished relaxing individual 96 on rank 11 with LAMMPS
+Finished relaxing individual 89 on rank 4 with LAMMPS
+Relaxing individual 101 on rank 4 with LAMMPS
+Finished relaxing individual 90 on rank 5 with LAMMPS
+Relaxing individual 102 on rank 5 with LAMMPS
+Finished relaxing individual 103 on rank 6 with LAMMPS
+Finished relaxing individual 105 on rank 8 with LAMMPS
+Finished relaxing individual 97 on rank 0 with LAMMPS
+Finished relaxing individual 104 on rank 7 with LAMMPS
+Finished relaxing individual 100 on rank 3 with LAMMPS
+Finished relaxing individual 99 on rank 2 with LAMMPS
+Finished relaxing individual 102 on rank 5 with LAMMPS
+Finished relaxing individual 98 on rank 1 with LAMMPS
+Finished relaxing individual 101 on rank 4 with LAMMPS
+Running LAMMPS fitness evaluation on individual 92
+Running LAMMPS fitness evaluation on individual 104
+Running LAMMPS fitness evaluation on individual 96
+Running LAMMPS fitness evaluation on individual 90
+Running LAMMPS fitness evaluation on individual 102
+Running LAMMPS fitness evaluation on individual 88
+Running LAMMPS fitness evaluation on individual 94
+Running LAMMPS fitness evaluation on individual 44
+Running LAMMPS fitness evaluation on individual 100
+Running LAMMPS fitness evaluation on individual 98
+Running LAMMPS fitness evaluation on individual 91
+Running LAMMPS fitness evaluation on individual 103
+Running LAMMPS fitness evaluation on individual 89
+Running LAMMPS fitness evaluation on individual 101
+Running LAMMPS fitness evaluation on individual 93
+Running LAMMPS fitness evaluation on individual 105
+Running LAMMPS fitness evaluation on individual 95
+Running fitness LAMMPS on the entire population
+Running LAMMPS fitness evaluation on individual 32
+Running LAMMPS fitness evaluation on individual 97
+Running LAMMPS fitness evaluation on individual 82
+Running LAMMPS fitness evaluation on individual 99
+
+Starting generation 7
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 68> and <Individual 55>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 38> and <Individual 21>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 55> and <Individual 21>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 68> and <Individual 9>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 68> and <Individual 80>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 68> and <Individual 55>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 90> and <Individual 66>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 28> and <Individual 31>
+Performing mutation <function move_atoms at 0x2aaabd7207b8> on individual 46
+Performing mutation None on individual 61
+Performing mutation None on individual 66
+Performing mutation None on individual 96
+Performing mutation <function rotate_cluster at 0x2aaabd72fc80> on individual 106
+Performing mutation None on individual 109
+Performing mutation None on individual 110
+Performing mutation None on individual 121
+Running relaxation LAMMPS on the entire population
+Relaxing individual 46 on rank 0 with LAMMPS
+Relaxing individual 109 on rank 4 with LAMMPS
+Relaxing individual 116 on rank 11 with LAMMPS
+Relaxing individual 115 on rank 10 with LAMMPS
+Relaxing individual 107 on rank 2 with LAMMPS
+Relaxing individual 113 on rank 8 with LAMMPS
+Relaxing individual 111 on rank 6 with LAMMPS
+Relaxing individual 114 on rank 9 with LAMMPS
+Relaxing individual 112 on rank 7 with LAMMPS
+Relaxing individual 110 on rank 5 with LAMMPS
+Relaxing individual 106 on rank 1 with LAMMPS
+Relaxing individual 108 on rank 3 with LAMMPS
+Finished relaxing individual 109 on rank 4 with LAMMPS
+Relaxing individual 121 on rank 4 with LAMMPS
+Finished relaxing individual 46 on rank 0 with LAMMPS
+Relaxing individual 117 on rank 0 with LAMMPS
+Finished relaxing individual 107 on rank 2 with LAMMPS
+Relaxing individual 119 on rank 2 with LAMMPS
+Finished relaxing individual 116 on rank 11 with LAMMPS
+Finished relaxing individual 115 on rank 10 with LAMMPS
+Finished relaxing individual 106 on rank 1 with LAMMPS
+Relaxing individual 118 on rank 1 with LAMMPS
+Finished relaxing individual 114 on rank 9 with LAMMPS
+Finished relaxing individual 113 on rank 8 with LAMMPS
+Finished relaxing individual 112 on rank 7 with LAMMPS
+Finished relaxing individual 108 on rank 3 with LAMMPS
+Relaxing individual 120 on rank 3 with LAMMPS
+Finished relaxing individual 110 on rank 5 with LAMMPS
+Finished relaxing individual 111 on rank 6 with LAMMPS
+Finished relaxing individual 121 on rank 4 with LAMMPS
+Finished relaxing individual 119 on rank 2 with LAMMPS
+Finished relaxing individual 118 on rank 1 with LAMMPS
+Finished relaxing individual 117 on rank 0 with LAMMPS
+Finished relaxing individual 120 on rank 3 with LAMMPS
+Running LAMMPS fitness evaluation on individual 112
+Running LAMMPS fitness evaluation on individual 110
+Running LAMMPS fitness evaluation on individual 116
+Running LAMMPS fitness evaluation on individual 106
+Running LAMMPS fitness evaluation on individual 108
+Running LAMMPS fitness evaluation on individual 118
+Running LAMMPS fitness evaluation on individual 120
+Running LAMMPS fitness evaluation on individual 114
+Running LAMMPS fitness evaluation on individual 111
+Running LAMMPS fitness evaluation on individual 115
+Running LAMMPS fitness evaluation on individual 109
+Running fitness LAMMPS on the entire population
+Running LAMMPS fitness evaluation on individual 121
+Running LAMMPS fitness evaluation on individual 46
+Running LAMMPS fitness evaluation on individual 117
+Running LAMMPS fitness evaluation on individual 113
+Running LAMMPS fitness evaluation on individual 107
+Running LAMMPS fitness evaluation on individual 119
+
+Starting generation 8
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 80> and <Individual 90>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 89> and <Individual 55>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 89> and <Individual 21>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 80> and <Individual 55>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 21> and <Individual 55>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 38> and <Individual 66>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 80> and <Individual 89>
+Performing mutation None on individual 66
+Performing mutation None on individual 80
+Performing mutation None on individual 96
+Performing mutation <function move_atoms at 0x2aaabd7207b8> on individual 122
+Performing mutation None on individual 132
+Performing mutation None on individual 134
+Relaxing individual 133 on rank 11 with LAMMPS
+Relaxing individual 127 on rank 5 with LAMMPS
+Relaxing individual 129 on rank 7 with LAMMPS
+Relaxing individual 131 on rank 9 with LAMMPS
+Relaxing individual 126 on rank 4 with LAMMPS
+Relaxing individual 128 on rank 6 with LAMMPS
+Relaxing individual 123 on rank 1 with LAMMPS
+Relaxing individual 125 on rank 3 with LAMMPS
+Relaxing individual 130 on rank 8 with LAMMPS
+Relaxing individual 132 on rank 10 with LAMMPS
+Relaxing individual 124 on rank 2 with LAMMPS
+Running relaxation LAMMPS on the entire population
+Relaxing individual 122 on rank 0 with LAMMPS
+Finished relaxing individual 125 on rank 3 with LAMMPS
+Finished relaxing individual 133 on rank 11 with LAMMPS
+Finished relaxing individual 126 on rank 4 with LAMMPS
+Finished relaxing individual 129 on rank 7 with LAMMPS
+Finished relaxing individual 123 on rank 1 with LAMMPS
+Relaxing individual 135 on rank 1 with LAMMPS
+Finished relaxing individual 124 on rank 2 with LAMMPS
+Finished relaxing individual 128 on rank 6 with LAMMPS
+Finished relaxing individual 127 on rank 5 with LAMMPS
+Finished relaxing individual 131 on rank 9 with LAMMPS
+Finished relaxing individual 132 on rank 10 with LAMMPS
+Finished relaxing individual 130 on rank 8 with LAMMPS
+Finished relaxing individual 135 on rank 1 with LAMMPS
+Finished relaxing individual 122 on rank 0 with LAMMPS
+Relaxing individual 134 on rank 0 with LAMMPS
+Finished relaxing individual 134 on rank 0 with LAMMPS
+Running LAMMPS fitness evaluation on individual 129
+Running LAMMPS fitness evaluation on individual 133
+Running LAMMPS fitness evaluation on individual 127
+Running LAMMPS fitness evaluation on individual 131
+Running LAMMPS fitness evaluation on individual 123
+Running LAMMPS fitness evaluation on individual 135
+Running LAMMPS fitness evaluation on individual 125
+Running LAMMPS fitness evaluation on individual 128
+Running fitness LAMMPS on the entire population
+Running LAMMPS fitness evaluation on individual 122
+Running LAMMPS fitness evaluation on individual 134
+Running LAMMPS fitness evaluation on individual 130
+Running LAMMPS fitness evaluation on individual 132
+Running LAMMPS fitness evaluation on individual 126
+Running LAMMPS fitness evaluation on individual 124
+
+Starting generation 9
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 89> and <Individual 80>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 66> and <Individual 28>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 80> and <Individual 9>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 66> and <Individual 89>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 51> and <Individual 93>
+Performing mutation None on individual 139
+Relaxing individual 143 on rank 7 with LAMMPS
+Relaxing individual 141 on rank 5 with LAMMPS
+Relaxing individual 142 on rank 6 with LAMMPS
+Relaxing individual 140 on rank 4 with LAMMPS
+Relaxing individual 139 on rank 3 with LAMMPS
+Relaxing individual 137 on rank 1 with LAMMPS
+Relaxing individual 145 on rank 9 with LAMMPS
+Relaxing individual 144 on rank 8 with LAMMPS
+Running relaxation LAMMPS on the entire population
+Relaxing individual 138 on rank 2 with LAMMPS
+Relaxing individual 136 on rank 0 with LAMMPS
+Finished relaxing individual 143 on rank 7 with LAMMPS
+Finished relaxing individual 145 on rank 9 with LAMMPS
+Finished relaxing individual 141 on rank 5 with LAMMPS
+Finished relaxing individual 139 on rank 3 with LAMMPS
+Finished relaxing individual 144 on rank 8 with LAMMPS
+Finished relaxing individual 138 on rank 2 with LAMMPS
+Finished relaxing individual 137 on rank 1 with LAMMPS
+Finished relaxing individual 140 on rank 4 with LAMMPS
+Finished relaxing individual 136 on rank 0 with LAMMPS
+Finished relaxing individual 142 on rank 6 with LAMMPS
+Running LAMMPS fitness evaluation on individual 143
+Running LAMMPS fitness evaluation on individual 141
+Running LAMMPS fitness evaluation on individual 139
+Running LAMMPS fitness evaluation on individual 145
+Running LAMMPS fitness evaluation on individual 137
+Running LAMMPS fitness evaluation on individual 142
+Running LAMMPS fitness evaluation on individual 140
+Running fitness LAMMPS on the entire population
+Running LAMMPS fitness evaluation on individual 136
+Running LAMMPS fitness evaluation on individual 144
+Running LAMMPS fitness evaluation on individual 138
+
+Starting generation 10
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 31> and <Individual 66>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 28> and <Individual 66>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 66> and <Individual 116>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 55> and <Individual 61>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 140> and <Individual 66>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 68> and <Individual 136>
+Performing crossover <function rotate at 0x2aaabd673c80> on individuals <Individual 96> and <Individual 21>
+Performing mutation None on individual 28
+Performing mutation None on individual 51
+Performing mutation <function rotate_cluster at 0x2aaabd72fc80> on individual 90
+Performing mutation None on individual 136
+Performing mutation None on individual 140
+Performing mutation None on individual 153
+Performing mutation None on individual 157
+Performing mutation None on individual 158
+Relaxing individual 156 on rank 11 with LAMMPS
+Relaxing individual 152 on rank 7 with LAMMPS
+Relaxing individual 150 on rank 5 with LAMMPS
+Relaxing individual 154 on rank 9 with LAMMPS
+Relaxing individual 148 on rank 3 with LAMMPS
+Relaxing individual 146 on rank 1 with LAMMPS
+Running relaxation LAMMPS on the entire population
+Relaxing individual 149 on rank 4 with LAMMPS
+Relaxing individual 151 on rank 6 with LAMMPS
+Relaxing individual 90 on rank 0 with LAMMPS
+Relaxing individual 155 on rank 10 with LAMMPS
+Relaxing individual 147 on rank 2 with LAMMPS
+Relaxing individual 153 on rank 8 with LAMMPS
+Finished relaxing individual 152 on rank 7 with LAMMPS
+Finished relaxing individual 156 on rank 11 with LAMMPS
+Finished relaxing individual 154 on rank 9 with LAMMPS
+Finished relaxing individual 148 on rank 3 with LAMMPS
+Finished relaxing individual 146 on rank 1 with LAMMPS
+Relaxing individual 158 on rank 1 with LAMMPS
+Finished relaxing individual 90 on rank 0 with LAMMPS
+Finished relaxing individual 151 on rank 6 with LAMMPS
+Relaxing individual 157 on rank 0 with LAMMPS
+Finished relaxing individual 149 on rank 4 with LAMMPS
+Finished relaxing individual 150 on rank 5 with LAMMPS
+Finished relaxing individual 155 on rank 10 with LAMMPS
+Finished relaxing individual 153 on rank 8 with LAMMPS
+Finished relaxing individual 147 on rank 2 with LAMMPS
+Relaxing individual 159 on rank 2 with LAMMPS
+Finished relaxing individual 158 on rank 1 with LAMMPS
+Finished relaxing individual 157 on rank 0 with LAMMPS
+Finished relaxing individual 159 on rank 2 with LAMMPS
+Running LAMMPS fitness evaluation on individual 152
+Running LAMMPS fitness evaluation on individual 150
+Running LAMMPS fitness evaluation on individual 156
+Running LAMMPS fitness evaluation on individual 148
+Running LAMMPS fitness evaluation on individual 146
+Running LAMMPS fitness evaluation on individual 158
+Running LAMMPS fitness evaluation on individual 154
+Running LAMMPS fitness evaluation on individual 151
+Running LAMMPS fitness evaluation on individual 153
+Running LAMMPS fitness evaluation on individual 155
+Running LAMMPS fitness evaluation on individual 149
+Running fitness LAMMPS on the entire population
+Running LAMMPS fitness evaluation on individual 90
+Running LAMMPS fitness evaluation on individual 147
+Running LAMMPS fitness evaluation on individual 157
+Running LAMMPS fitness evaluation on individual 159
+Finished running GA!

@@ -1,0 +1,195 @@
+#+TITLE:     DataExplorer
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc author:nil
+#+INFOJS_OPT: view:nil toc:t ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+SETUPFILE: theme-readtheorg.setup
+#+LATEX_HEADER: \usepackage[top=1in, bottom=1.in, left=1in, right=1in]{geometry}
+
+* Introduction
+The purpose of this is to work through some examples in using the ~DataExplorer~ to analyze optimization runs done by StructOpt. The example calculations we will be working with are held in the ~job_manager_examples~ folder. These jobs were submitted by the ~JobManager~ wrapper. All examples were of the optimization of a Au_55 nanocluster.
+
+* Example: Pt_561 LAMMPS+STEM optimization
+The scripts below are tutorial scripts of how to read data out of an example calculation. The specific example optimization run used in the following scripts is the optimization of a Pt nanoparticle against a simulated Pt_561 STEM image. The nanoparticle and corresponding STEM image is shown below.
+
+#+CAPTION: Structural model (left) and linear convolution simulated STEM image (right) of the Pt_{561} nanoparticle in the (100) orientation. The simulated STEM image is used on the STEM fitness function in the following example.
+#+ATTR_HTML: :width 450
+[[./images/Pt561.png]]
+
+* Initialization
+  :PROPERTIES:
+  :ORDERED:  t
+  :END:
+The initialization of the DataExplorer is done by specifying the ~log{time}~ directory where the calculation has been performed. If the directory name is known, initialization is simple. In contrast, if the user submitted the job using the ~JobManager~, the directory which holds the ~log{time}~ directory can be used to locate a specific ~log{time}~ based on the order of which it was run.
+
+Both examples of this usage is shown below.
+
+#+BEGIN_SRC python :results output
+from structopt.utilities.job_manager import JobManager
+from structopt.utilities.data_explorer.core import DataExplorer
+
+# Initialization if the logdir is known
+logdir = 'job_manager_examples/Pt561-LAMMPS-STEM/logs20160909134206'
+DE = DataExplorer(logdir)
+
+# Initialization through the JobManager
+calcdir = 'job_manager_examples/Pt561-LAMMPS-STEM'
+job = JobManager(calcdir)
+DE = job.get_data_explorer()
+#+END_SRC
+
+#+RESULTS:
+
+* Fitnesses
+** Long example
+The example below shows how one reads the fitness of the most fit individual in each generation. This first script is a long example that shows the structure of the DataExplorer once it is loaded. 
+
+#+BEGIN_SRC python :results output org drawer
+import numpy as np
+import matplotlib.pyplot as plt
+from structopt.utilities.job_manager import JobManager
+
+# Initialization through the JobManager
+calcdir = 'job_manager_examples/Pt561-LAMMPS-STEM'
+job = JobManager(calcdir)
+DE = job.get_data_explorer()
+
+# Get the average fitnesses
+average_fitnesses = []
+
+for population in DE:
+    population_fitnesses = []
+    for individual_id in population:
+        individual = population[individual_id]
+        population_fitnesses.append(individual.fitness)
+    average_fitnesses.append(np.mean(population_fitnesses))
+
+plt.figure(1, (4, 3))
+plt.plot(range(len(average_fitnesses)), average_fitnesses, c='k')
+plt.xlabel('Generation')
+plt.ylabel('Fitness')
+plt.tight_layout()
+plt.savefig('images/average-fitness.png')
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+:END:
+
+#+CAPTION: The evolution of the average fitness (total energy) of a Au_{55} nanoparticle
+#+ATTR_ORG: :width 400
+#+ATTR_HTML: :width 400
+[[./images/average-fitness.png]]
+
+The ~DataExplorer~ object functions like a list of populations, so with index /i/ returns a ~Population~ object. The ~Population~ object functions like an dictionary, where the /id/ of each individual is each key, and the ~Individual~ object is each value. Each /id/ is unique to an ~Individual~ is assigned during its creation. When loaded through the ~DataExplorer~, the ~Individual~ comes preloaded with a number of properties that provide information of it. One of which its fitness, which is shown above.
+
+** Short example
+The code below is a one-liner version of the code shown in the previous section for loading the data. It makes use of list comprehension, evaluates faster, and is more concise.
+
+#+BEGIN_SRC python :results output
+import numpy as np
+import matplotlib.pyplot as plt
+from structopt.utilities.job_manager import JobManager
+
+# Initialization through the JobManager
+calcdir = 'job_manager_examples/Pt561-LAMMPS-STEM'
+job = JobManager(calcdir)
+DE = job.get_data_explorer()
+
+# Get the average fitnesses
+avg_fit = np.mean([[ind.fitness for ind in pop.values()] for pop in DE], axis=1)
+
+plt.figure(1, (4, 3))
+plt.plot(range(len(avg_fit)), avg_fit, c='k')
+plt.xlabel('Generation')
+plt.ylabel('Fitness')
+plt.tight_layout()
+plt.savefig('images/average-fitness.png', dpi=300)
+#+END_SRC
+
+#+RESULTS:
+
+** Multiple fitness values
+One of the hallmarks of StructOpt is its ability to incorporate multiple fitness evaluations into its objective function. The code below analyzes an example calculation where a nanoparticle was fit to a simulated STEM image of a known nanoparticle structure. In this case, we are interested in the fitness of the lowest energy structure.
+
+#+BEGIN_SRC python :results output
+import matplotlib.pyplot as plt
+from structopt.utilities.job_manager import JobManager
+
+# Initialization through the JobManager
+calcdir = 'job_manager_examples/Pt561-LAMMPS-STEM'
+job = JobManager(calcdir)
+DE = job.get_data_explorer()
+
+# Get the average fitnesses
+min_LAMMPS = [min([ind.LAMMPS for ind in pop.values()]) for pop in DE]
+min_STEM = [min([ind.STEM for ind in pop.values()]) for pop in DE]
+
+fig = plt.figure(1, (4, 4))
+ax_STEM = fig.add_subplot(211)
+ax_LAMMPS = fig.add_subplot(212)
+
+ax_STEM.plot(range(len(min_STEM)), min_STEM, c='k')
+ax_LAMMPS.plot(range(len(min_LAMMPS)), min_LAMMPS, c='k')
+
+ax_STEM.set_xticklabels([])
+ax_LAMMPS.set_xlabel('Generations')
+ax_STEM.set_ylabel(r'$\chi^{2}$')
+ax_LAMMPS.set_ylabel(r'$E_{f}$ (eV/atom)')
+plt.tight_layout()
+plt.savefig('images/fitness-LAMMPS-STEM.png', dpi=300)
+plt.show()
+#+END_SRC
+
+#+RESULTS:
+
+#+CAPTION: Evolution of the value of both the STEM (top) and LAMMPS (bottom) fitness functions
+#+ATTR_ORG: :width 400
+#+ATTR_HTML: :width 400
+[[./images/fitness-LAMMPS-STEM.png]]
+
+** Getting fitness values from multiple restarts
+In the ~JobManager~ section we talked about restarting runs in the same calculation directory folder. These are ordered by the time in which they were run. We can use some functionality of the ~JobManager~ module to collect values of earlier runs. 
+
+#+BEGIN_SRC python :results output
+import matplotlib.pyplot as plt
+from structopt.utilities.job_manager import JobManager
+
+# Initialization through the JobManager
+calcdir = 'job_manager_examples/Pt561-LAMMPS-STEM'
+job = JobManager(calcdir)
+
+min_LAMMPS, min_STEM = [], []
+
+for i in range(job.get_number_of_runs()):
+    job.set_run(i)
+    DE = job.get_data_explorer()
+    min_LAMMPS += [min([ind.LAMMPS for ind in pop.values()]) for pop in DE]
+    min_STEM += [min([ind.STEM for ind in pop.values()]) for pop in DE]
+
+fig = plt.figure(1, (4, 4))
+ax_STEM = fig.add_subplot(211)
+ax_LAMMPS = fig.add_subplot(212)
+
+ax_STEM.plot(range(len(min_STEM)), min_STEM, c='k')
+ax_LAMMPS.plot(range(len(min_LAMMPS)), min_LAMMPS, c='k')
+
+ax_STEM.set_xticklabels([])
+ax_LAMMPS.set_xlabel('Generations')
+ax_STEM.set_ylabel(r'$\chi^{2}$')
+ax_LAMMPS.set_ylabel(r'$E_{f}$ (eV/atom)')
+plt.tight_layout()
+plt.savefig('images/fitness-LAMMPS-STEM-extended.png', dpi=300)
+#plt.show()
+#+END_SRC
+
+#+RESULTS:
+: /Users/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Pt561-LAMMPS-STEM/logs20160909134206
+: /Users/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Pt561-LAMMPS-STEM/logs20160909134206
+: /Users/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Pt561-LAMMPS-STEM/logs20160908132802
+: /Users/zxu/research/StructOpt_modular-dev/examples/job_manager_examples/Pt561-LAMMPS-STEM/logs20160909134206
+
+* Genealogy
+* Structures

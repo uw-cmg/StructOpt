@@ -1,0 +1,57 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k+kn}{from} \PYGdefault{n+nn}{structopt.utilities.job\PYGdefaultZus{}manager} \PYGdefault{k+kn}{import} \PYGdefault{n}{Job}
+\PYGdefault{k+kn}{from} \PYGdefault{n+nn}{structopt.utilities.exceptions} \PYGdefault{k+kn}{import} \PYGdefault{n}{Running}\PYGdefault{p}{,} \PYGdefault{n}{Submitted}\PYGdefault{p}{,} \PYGdefault{n}{Queued}
+
+\PYGdefault{n}{calcdir} \PYGdefault{o}{=} \PYGdefault{l+s+s1}{\PYGdefaultZsq{}job\PYGdefaultZus{}manager\PYGdefaultZus{}examples/Au55\PYGdefaultZhy{}example\PYGdefaultZsq{}}
+
+\PYGdefault{n}{LAMMPS\PYGdefaultZus{}parameters} \PYGdefault{o}{=} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}use\PYGdefaultZus{}mpi4py\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{n+nb+bp}{True}\PYGdefault{p}{,}
+	             \PYGdefault{l+s+s2}{\PYGdefaultZdq{}MPMD\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{l+m+mi}{0}\PYGdefault{p}{,}
+	             \PYGdefault{l+s+s2}{\PYGdefaultZdq{}keep\PYGdefaultZus{}files\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{n+nb+bp}{False}\PYGdefault{p}{,}
+	             \PYGdefault{l+s+s2}{\PYGdefaultZdq{}min\PYGdefaultZus{}style\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{l+s+s2}{\PYGdefaultZdq{}cg\PYGdefaultZdq{}}\PYGdefault{p}{,}
+                    \PYGdefault{l+s+s2}{\PYGdefaultZdq{}min\PYGdefaultZus{}modify\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{l+s+s2}{\PYGdefaultZdq{}line quadratic\PYGdefaultZdq{}}\PYGdefault{p}{,}
+	             \PYGdefault{l+s+s2}{\PYGdefaultZdq{}minimize\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{l+s+s2}{\PYGdefaultZdq{}1e\PYGdefaultZhy{}8 1e\PYGdefaultZhy{}8 5000 10000\PYGdefaultZdq{}}\PYGdefault{p}{,}
+	             \PYGdefault{l+s+s2}{\PYGdefaultZdq{}pair\PYGdefaultZus{}style\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{l+s+s2}{\PYGdefaultZdq{}eam\PYGdefaultZdq{}}\PYGdefault{p}{,}
+	             \PYGdefault{l+s+s2}{\PYGdefaultZdq{}potential\PYGdefaultZus{}file\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{l+s+s2}{\PYGdefaultZdq{}\PYGdefaultZdl{}STRUCTOPT\PYGdefaultZus{}HOME/potentials/Au\PYGdefaultZus{}u3.eam\PYGdefaultZdq{}}\PYGdefault{p}{,}
+	             \PYGdefault{l+s+s2}{\PYGdefaultZdq{}thermo\PYGdefaultZus{}steps\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{l+m+mi}{0}\PYGdefault{p}{\PYGdefaultZcb{}}
+
+\PYGdefault{n}{StructOpt\PYGdefaultZus{}parameters} \PYGdefault{o}{=} \PYGdefault{p}{\PYGdefaultZob{}}
+    \PYGdefault{l+s+s2}{\PYGdefaultZdq{}seed\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{l+m+mi}{0}\PYGdefault{p}{,}
+    \PYGdefault{l+s+s2}{\PYGdefaultZdq{}structure\PYGdefaultZus{}type\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{l+s+s2}{\PYGdefaultZdq{}cluster\PYGdefaultZdq{}}\PYGdefault{p}{,}
+    \PYGdefault{l+s+s2}{\PYGdefaultZdq{}generators\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}sphere\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}number\PYGdefaultZus{}of\PYGdefaultZus{}individuals\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{l+m+mi}{20}\PYGdefault{p}{,}
+		              \PYGdefault{l+s+s2}{\PYGdefaultZdq{}kwargs\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}atomlist\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{[[}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}Au\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{l+m+mi}{55}\PYGdefault{p}{]],}
+			                 \PYGdefault{l+s+s2}{\PYGdefaultZdq{}cell\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{[}\PYGdefault{l+m+mi}{20}\PYGdefault{p}{,} \PYGdefault{l+m+mi}{20}\PYGdefault{p}{,} \PYGdefault{l+m+mi}{20}\PYGdefault{p}{]\PYGdefaultZcb{}\PYGdefaultZcb{}\PYGdefaultZcb{},}
+    \PYGdefault{l+s+s2}{\PYGdefaultZdq{}fitnesses\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}LAMMPS\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}weight\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{l+m+mf}{1.0}\PYGdefault{p}{,}
+	           \PYGdefault{l+s+s2}{\PYGdefaultZdq{}kwargs\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{n}{LAMMPS\PYGdefaultZus{}parameters}\PYGdefault{p}{\PYGdefaultZcb{}\PYGdefaultZcb{},}
+    \PYGdefault{l+s+s2}{\PYGdefaultZdq{}relaxations\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}LAMMPS\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}order\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{l+m+mi}{0}\PYGdefault{p}{,}
+                               \PYGdefault{l+s+s2}{\PYGdefaultZdq{}kwargs\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{n}{LAMMPS\PYGdefaultZus{}parameters}\PYGdefault{p}{\PYGdefaultZcb{}\PYGdefaultZcb{},}
+    \PYGdefault{l+s+s2}{\PYGdefaultZdq{}convergence\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}max\PYGdefaultZus{}generations\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{l+m+mi}{10}\PYGdefault{p}{\PYGdefaultZcb{},}
+    \PYGdefault{l+s+s2}{\PYGdefaultZdq{}mutations\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}move\PYGdefaultZus{}atoms\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}probability\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{l+m+mf}{0.1}\PYGdefault{p}{\PYGdefaultZcb{},}
+	          \PYGdefault{l+s+s2}{\PYGdefaultZdq{}rotate\PYGdefaultZus{}cluster\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}probability\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{l+m+mf}{0.1}\PYGdefault{p}{\PYGdefaultZcb{}\PYGdefaultZcb{},}
+    \PYGdefault{l+s+s2}{\PYGdefaultZdq{}crossovers\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}rotate\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}probability\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{l+m+mf}{0.7}\PYGdefault{p}{\PYGdefaultZcb{}\PYGdefaultZcb{},}
+    \PYGdefault{l+s+s2}{\PYGdefaultZdq{}predators\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}best\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}probability\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{l+m+mf}{1.0}\PYGdefault{p}{\PYGdefaultZcb{}\PYGdefaultZcb{},}
+    \PYGdefault{l+s+s2}{\PYGdefaultZdq{}selections\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}rank\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}probability\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{l+m+mf}{1.0}\PYGdefault{p}{,}
+                            \PYGdefault{l+s+s2}{\PYGdefaultZdq{}kwargs\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}unique\PYGdefaultZus{}pairs\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{n+nb+bp}{False}\PYGdefault{p}{,}
+                                       \PYGdefault{l+s+s2}{\PYGdefaultZdq{}unique\PYGdefaultZus{}parents\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{n+nb+bp}{False}\PYGdefault{p}{\PYGdefaultZcb{}\PYGdefaultZcb{}\PYGdefaultZcb{},}
+    \PYGdefault{l+s+s2}{\PYGdefaultZdq{}fingerprinters\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}keep\PYGdefaultZus{}best\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{n+nb+bp}{True}\PYGdefault{p}{,}
+                       \PYGdefault{l+s+s2}{\PYGdefaultZdq{}diversify\PYGdefaultZus{}module\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}probability\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{l+m+mf}{1.0}\PYGdefault{p}{,}
+                                            \PYGdefault{l+s+s2}{\PYGdefaultZdq{}kwargs\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}module\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{l+s+s2}{\PYGdefaultZdq{}LAMMPS\PYGdefaultZdq{}}\PYGdefault{p}{,}
+                                                       \PYGdefault{l+s+s2}{\PYGdefaultZdq{}min\PYGdefaultZus{}diff\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{l+m+mf}{0.001}\PYGdefault{p}{\PYGdefaultZcb{}\PYGdefaultZcb{}\PYGdefaultZcb{},}
+    \PYGdefault{l+s+s2}{\PYGdefaultZdq{}post\PYGdefaultZus{}processing\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s2}{\PYGdefaultZdq{}XYZs\PYGdefaultZdq{}}\PYGdefault{p}{:} \PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{\PYGdefaultZcb{},}
+\PYGdefault{p}{\PYGdefaultZcb{}}
+
+\PYGdefault{n}{submit\PYGdefaultZus{}parameters} \PYGdefault{o}{=} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s+s1}{\PYGdefaultZsq{}system\PYGdefaultZsq{}}\PYGdefault{p}{:} \PYGdefault{l+s+s1}{\PYGdefaultZsq{}PBS\PYGdefaultZsq{}}\PYGdefault{p}{,}
+                     \PYGdefault{l+s+s1}{\PYGdefaultZsq{}queue\PYGdefaultZsq{}}\PYGdefault{p}{:} \PYGdefault{l+s+s1}{\PYGdefaultZsq{}morgan2\PYGdefaultZsq{}}\PYGdefault{p}{,}
+                     \PYGdefault{l+s+s1}{\PYGdefaultZsq{}nodes\PYGdefaultZsq{}}\PYGdefault{p}{:} \PYGdefault{l+m+mi}{1}\PYGdefault{p}{,}
+                     \PYGdefault{l+s+s1}{\PYGdefaultZsq{}cores\PYGdefaultZsq{}}\PYGdefault{p}{:} \PYGdefault{l+m+mi}{12}\PYGdefault{p}{,}
+                     \PYGdefault{l+s+s1}{\PYGdefaultZsq{}walltime\PYGdefaultZsq{}}\PYGdefault{p}{:} \PYGdefault{l+m+mi}{12}\PYGdefault{p}{\PYGdefaultZcb{}}
+
+\PYGdefault{n}{optimizer} \PYGdefault{o}{=} \PYGdefault{l+s+s1}{\PYGdefaultZsq{}genetic.py\PYGdefaultZsq{}}
+
+\PYGdefault{n}{job} \PYGdefault{o}{=} \PYGdefault{n}{Job}\PYGdefault{p}{(}\PYGdefault{n}{calcdir}\PYGdefault{p}{,} \PYGdefault{n}{optimizer}\PYGdefault{p}{,} \PYGdefault{n}{StructOpt\PYGdefaultZus{}parameters}\PYGdefault{p}{,} \PYGdefault{n}{submit\PYGdefaultZus{}parameters}\PYGdefault{p}{)}
+\PYGdefault{k}{try}\PYGdefault{p}{:}
+    \PYGdefault{n}{job}\PYGdefault{o}{.}\PYGdefault{n}{optimize}\PYGdefault{p}{()}
+\PYGdefault{k}{except} \PYGdefault{p}{(}\PYGdefault{n}{Submitted}\PYGdefault{p}{,} \PYGdefault{n}{Queued}\PYGdefault{p}{):}
+    \PYGdefault{k}{print}\PYGdefault{p}{(}\PYGdefault{n}{calcdir}\PYGdefault{p}{,} \PYGdefault{n}{job}\PYGdefault{o}{.}\PYGdefault{n}{get\PYGdefaultZus{}jobid}\PYGdefault{p}{(),} \PYGdefault{l+s+s1}{\PYGdefaultZsq{}submitted or queued\PYGdefaultZsq{}}\PYGdefault{p}{)}
+\PYGdefault{k}{except} \PYGdefault{n}{Running}\PYGdefault{p}{:}
+    \PYGdefault{k}{pass}
+\end{Verbatim}
