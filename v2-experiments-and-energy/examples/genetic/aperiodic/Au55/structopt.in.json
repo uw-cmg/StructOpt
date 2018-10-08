@@ -2,59 +2,67 @@
     "seed": 0,
     "structure_type": "cluster",
     "generators": {
-	"fcc": {"number_of_individuals": 5,
-		"kwargs": {"atomlist": [["Au", 55]],
-                           "orientation": "100",
+	"fcc": {
+           "number_of_individuals": 5,
+		   "kwargs": {
+               "atomlist": [["Au", 55]],
+               "orientation": "100",
 			   "cell": [20, 20, 20],
-                           "a": 4.08}}
+               "a": 4.08
+            }
+        }
     },
     "fitnesses": {
-        "LAMMPS": {"weight": 1.0, 
-	           "kwargs": {"use_mpi4py": false,
-	                      "MPMD": 0,
-	                      "keep_files": true,
-	                      "min_style": "cg",
-                              "min_modify": "line quadratic",
-	                      "minimize": "1e-8 1e-8 5000 10000",
-	                      "pair_style": "eam",
-	                      "potential_file": "$STRUCTOPT_HOME/potentials/Au_u3.eam",
-	                      "thermo_steps": 0,
-                              "reference": {"Au": -3.930}}}
+        "LAMMPS": {
+            "weight": 1.0, 
+	        "kwargs": {
+                "use_mpi4py": false,
+	            "MPMD": 0,
+	            "keep_files": true,
+	            "min_style": "cg",
+                "min_modify": "line quadratic",
+	            "minimize": "1e-8 1e-8 5000 10000",
+	            "pair_style": "eam",
+	            "potential_file": "$STRUCTOPT_HOME/potentials/Au_u3.eam",
+	            "thermo_steps": 0,
+                "reference": {"Au": -3.930}
+            }
+        }
     },
     "relaxations": {
-        "LAMMPS": {"order": 0,
-                   "kwargs": {"use_mpi4py": false,
-	                      "MPMD": 0,
-	                      "keep_files": true,
-	                      "min_style": "cg",
-                              "min_modify": "line quadratic",
-	                      "minimize": "1e-8 1e-8 5000 10000",
-	                      "pair_style": "eam",
-	                      "potential_file": "$STRUCTOPT_HOME/potentials/Au_u3.eam",
-	                      "thermo_steps": 0}}
+        "LAMMPS": {
+            "order": 0,
+            "kwargs": {
+                "use_mpi4py": false,
+	            "MPMD": 0,
+	            "keep_files": true,
+	            "min_style": "cg",
+                "min_modify": "line quadratic",
+	            "minimize": "1e-8 1e-8 5000 10000",
+	            "pair_style": "eam",
+	            "potential_file": "$STRUCTOPT_HOME/potentials/Au_u3.eam",
+	            "thermo_steps": 0
+            }
+        }
     },
     "convergence": {
         "max_generations": 10
     },
     "mutations": {
-	"move_surface_atoms": {"probability": 0.0},
+        "move_surface_atoms": {"probability": 0.0},
         "move_atoms": {"probability": 0.0},
         "move_atoms_group": {"probability": 0.0},
-	"rotate_atoms": {"probability": 0.0},
-	"rotate_cluster": {"probability": 0.0},
+        "rotate_atoms": {"probability": 0.0},
+        "rotate_cluster": {"probability": 0.0},
         "rotate_all": {"probability": 0.0},
         "move_surface_defects": {"probability": 1.0}
     },
     "crossovers": {
-        "rotate": {"probability": 0.7,
-                   "kwargs": {"repair_composition": true}}
+        "rotate": {"probability": 0.7, "kwargs": {"repair_composition": true}}
     },
     "predators": {
-        "roulette": {"probability": 0.5,
-                     "kwargs": {"T": 1000}},
-        "diversify_module": {"probability": 0.5,
-                             "kwargs": {"module": "LAMMPS",
-                                        "min_diff": 0.01}}
+        "roulette": {"probability": 0.5, "kwargs": {"T": 1000}},
+        "diversify_module": {"probability": 0.5, "kwargs": {"module": "LAMMPS", "min_diff": 0.01}}
     },
     "selections": {
         "rank": {"probability": 1.0}
