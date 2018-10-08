@@ -1,8 +1,8 @@
 {
-    "logging": { },
+    "logging": {},
     "structure_type": "cluster",
     "generators": {
-        "sphere": {"number_of_individuals": 16,
+        "sphere": {"number_of_individuals": 20,
                    "kwargs": {"atomlist": [["Au", 309]],
                               "fill_factor": 0.74}}
     },

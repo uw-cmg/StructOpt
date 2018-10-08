@@ -6,9 +6,9 @@ import structopt
 parameters = structopt.setup(DictionaryObject({
     "structure_type": "cluster",
     "generators": {
-	"sphere": {"number_of_individuals": 2,
-		   "kwargs": {"atomlist": [["Au", 55]],
-			      "cell": [20, 20, 20]}}
+    "sphere": {"number_of_individuals": 2,
+           "kwargs": {"atomlist": [["Au", 55]],
+                  "cell": [20, 20, 20]}}
     },
     "fingerprinters": {
         "all_close_atom_positions": {"probability": 1.0}

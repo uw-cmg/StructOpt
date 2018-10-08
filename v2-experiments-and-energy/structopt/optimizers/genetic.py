@@ -40,7 +40,6 @@ class GeneticAlgorithm(object):
         if gparameters.mpi.rank == 0:
             print("Finished running GA!")
 
-
     def step(self):
         t_step_0 = time.time()
 
@@ -76,11 +75,11 @@ class GeneticAlgorithm(object):
         if gparameters.mpi.rank == 0:
             print("All fitnesses:\n  {}".format(fits))
         self.timing['fitness'].append(time.time() - t_fitness_0)
-        
+
         t_fingerprinter_0 = time.time()
         killed_by_fingerprinters = self.population.apply_fingerprinters()
         self.timing['fingerprinter'].append(time.time() - t_fingerprinter_0)
-        
+
         t_predator_0 = time.time()
         killed_by_predators = self.population.kill()
         self.timing['predator'].append(time.time() - t_predator_0)

@@ -1,15 +1,12 @@
 {
     "seed": 0,
-    "logging": { },
     "structure_type": "cluster",
     "generators": {
 	"fcc": {"number_of_individuals": 5,
-		"kwargs": {"atomlist": [["Cu", 45],
-                                        ["Zr", 10]],
+		"kwargs": {"atomlist": [["Au", 55]],
                            "orientation": "100",
 			   "cell": [20, 20, 20],
-                           "a": 4.08}}
-    },
+                           "a": 4.08}}},
     "fitnesses": {
         "LAMMPS": {"weight": 1.0, 
 	           "kwargs": {"use_mpi4py": false,
@@ -18,9 +15,10 @@
 	                      "min_style": "cg",
                               "min_modify": "line quadratic",
 	                      "minimize": "1e-8 1e-8 5000 10000",
-	                      "pair_style": "eam/alloy",
-	                      "potential_file": "$STRUCTOPT_HOME/potentials/ZrCu.lammps.eam",
-	                      "thermo_steps": 0}}
+	                      "pair_style": "eam",
+	                      "potential_file": "$STRUCTOPT_HOME/potentials/Au_u3.eam",
+	                      "thermo_steps": 0,
+                              "reference": {"Au": -3.930}}}
     },
     "relaxations": {
         "LAMMPS": {"order": 0,
@@ -30,23 +28,21 @@
 	                      "min_style": "cg",
                               "min_modify": "line quadratic",
 	                      "minimize": "1e-8 1e-8 5000 10000",
-	                      "pair_style": "eam/alloy",
-	                      "potential_file": "$STRUCTOPT_HOME/potentials/ZrCu.lammps.eam",
+	                      "pair_style": "eam",
+	                      "potential_file": "$STRUCTOPT_HOME/potentials/Au_u3.eam",
 	                      "thermo_steps": 0}}
     },
     "convergence": {
         "max_generations": 10
     },
     "mutations": {
-        "enrich_bulk": {"probability": 0.16},
-        "enrich_surface": {"probability": 0.16},
-        "enrich_surface_defects": {"probability": 0.16},
-        "enrich_surface_facets": {"probability": 0.16},
-        "poor2rich": {"probability": 0.16},
-        "rich2poor": {"probability": 0.16}
-    },
-    "fingerprinters": {
-        "options": []
+	"move_surface_atoms": {"probability": 0.0},
+        "move_atoms": {"probability": 0.0},
+        "move_atoms_group": {"probability": 0.0},
+	"rotate_atoms": {"probability": 0.0},
+	"rotate_cluster": {"probability": 0.0},
+        "rotate_all": {"probability": 0.0},
+        "move_surface_defects": {"probability": 1.0}
     },
     "crossovers": {
         "rotate": {"probability": 0.7}
@@ -56,7 +52,5 @@
     },
     "selections": {
         "rank": {"probability": 1.0}
-    },
-    "fileio": {},
-    "tools": {}
+    }
 }

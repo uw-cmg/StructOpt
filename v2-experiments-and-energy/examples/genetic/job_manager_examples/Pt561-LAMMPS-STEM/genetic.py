@@ -20,7 +20,6 @@ class GeneticAlgorithm(object):
         self.generation = 0
         self.converged = False
 
-
     def run(self):
         if logging.parameters.rank == 0:
             print("Starting main Opimizer loop!")
@@ -28,7 +27,6 @@ class GeneticAlgorithm(object):
             self.step()
         if logging.parameters.rank == 0:
             print("Finished running GA!")
-
 
     def step(self):
         if logging.parameters.rank == 0:
@@ -52,7 +50,6 @@ class GeneticAlgorithm(object):
         structopt.utilities.adapt(self.adaptation, self.population, self.generation)
         logging.parameters.generation += 1
         self.generation += 1
-
 
     def check_convergence(self):
         if self.generation >= self.convergence.max_generations:
@@ -105,12 +102,12 @@ if __name__ == "__main__":
     parameters = structopt.setup(sys.argv[1])
     random.seed(parameters.seed)
     np.random.seed(parameters.seed)
-    
+
     population = Population(parameters=parameters)
 
     with GeneticAlgorithm(population=population,
                           convergence=parameters.convergence,
                           post_processing=parameters.post_processing,
-                          adaptation=parameters.adaptation) as optimizer:    
+                          adaptation=parameters.adaptation) as optimizer:
         optimizer.run()
 

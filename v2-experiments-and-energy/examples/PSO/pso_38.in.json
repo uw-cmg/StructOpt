@@ -1,5 +1,5 @@
 {
-    "logging": { },
+    "logging": {},
     "structure_type": "cluster",
     "generators": {
         "sphere": {"number_of_individuals": 20,
