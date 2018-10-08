@@ -36,14 +36,8 @@
         "STEM": {
             "kwargs": {
                 "HWHM": 0.4,
-                "dimensions": [
-                    40.0,
-                    40.0
-                ],
-                "normalize": {
-                    "SSE": true,
-                    "nprotons": true
-                },
+                "dimensions": [40.0, 40.0],
+                "normalize": {"SSE": true, "nprotons": true},
                 "resolution": 5.0,
                 "target": "/home/zxu/research/PtMo-nanoparticles/nanoparticles/Pt561-cuboctahedron.xyz",
                 "use_mpi4py": true,
@@ -95,14 +89,8 @@
             "kwargs": {
                 "STEM_parameters": {
                     "HWHM": 0.4,
-                    "dimensions": [
-                        40.0,
-                        40.0
-                    ],
-                    "normalize": {
-                        "SSE": true,
-                        "nprotons": true
-                    },
+                    "dimensions": [40.0, 40.0],
+                    "normalize": {"SSE": true, "nprotons": true},
                     "resolution": 5.0,
                     "target": "/home/zxu/research/PtMo-nanoparticles/nanoparticles/Pt561-cuboctahedron.xyz",
                     "use_mpi4py": true,
@@ -142,14 +130,8 @@
         "STEM": {
             "kwargs": {
                 "HWHM": 0.4,
-                "dimensions": [
-                    40.0,
-                    40.0
-                ],
-                "normalize": {
-                    "SSE": true,
-                    "nprotons": true
-                },
+                "dimensions": [40.0, 40.0],
+                "normalize": {"SSE": true, "nprotons": true},
                 "resolution": 5.0,
                 "target": "/home/zxu/research/PtMo-nanoparticles/nanoparticles/Pt561-cuboctahedron.xyz",
                 "use_mpi4py": true,
