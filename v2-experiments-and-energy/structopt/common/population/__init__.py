@@ -28,7 +28,10 @@ class Population(SortedDict):
             # Unfortunately 'from' doesn't seem to work implicitly
             # so a getattr on the module is needed
             module = importlib.import_module('structopt.{}'.format(self.structure_type))
-            Structure = getattr(module, self.structure_type.title())
+            title = self.structure_type.title()
+            if title == "Aperiodic":
+                title = "APeriodic"
+            Structure = getattr(module, title)
 
             # Generate/load initial structures
             starting_id = 0
