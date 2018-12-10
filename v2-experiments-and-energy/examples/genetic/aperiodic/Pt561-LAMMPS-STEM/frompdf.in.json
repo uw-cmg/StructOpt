@@ -1,7 +1,7 @@
 {
     "seed": 0,
     "logging": {},
-    "structure_type": "cluster",
+    "structure_type": "aperiodic",
     "generators": {
         "fcc": {
             "number_of_individuals": 18,
@@ -34,7 +34,7 @@
             "weight": 100,
             "kwargs": {
                 "use_mpi4py": true,
-                "target": "$STRUCTOPT_HOME/v2-experiments-and-energy/examples/genetic/aperiodic/Pt561-LAMMPS-STEM/Pt561-cuboctahedron.xyz",
+                "target": "$STRUCTOPT_HOME/examples/genetic/aperiodic/Pt561-LAMMPS-STEM/Pt561-cuboctahedron.xyz",
                 "HWHM": 0.4,
                 "dimensions": [40.0, 40.0],
                 "resolution": 5.0,
@@ -63,7 +63,7 @@
             "order": 1,
             "kwargs": {
                 "use_mpi4py": true,
-                "target": "$STRUCTOPT_HOME/v2-experiments-and-energy/examples/genetic/aperiodic/Pt561-LAMMPS-STEM/Pt561-cuboctahedron.xyz",
+                "target": "$STRUCTOPT_HOME/examples/genetic/aperiodic/Pt561-LAMMPS-STEM/Pt561-cuboctahedron.xyz",
                 "HWHM": 0.4,
                 "dimensions": [40.0, 40.0],
                 "resolution": 5.0,
@@ -84,7 +84,7 @@
             "kwargs": {
                 "STEM_parameters": {
                     "use_mpi4py": true,
-                    "target": "$STRUCTOPT_HOME/v2-experiments-and-energy/examples/genetic/aperiodic/Pt561-LAMMPS-STEM/Pt561-cuboctahedron.xyz",
+                    "target": "$STRUCTOPT_HOME/examples/genetic/aperiodic/Pt561-LAMMPS-STEM/Pt561-cuboctahedron.xyz",
                     "HWHM": 0.4,
                     "dimensions": [40.0, 40.0],
                     "resolution": 5.0,
@@ -97,7 +97,6 @@
         }
     },
     "fingerprinters": {
-        "options": []
     },
     "crossovers": {
         "rotate": {

@@ -40,7 +40,7 @@ class LAMMPS(object):
     @single_core
     def __init__(self, parameters):
         # These variables never change
-        self.parameters = parameters
+        self.parameters = parameters.kwargs
         if hasattr(gparameters, 'logging'):
             self.output_dir = gparameters.logging.path
         else:
