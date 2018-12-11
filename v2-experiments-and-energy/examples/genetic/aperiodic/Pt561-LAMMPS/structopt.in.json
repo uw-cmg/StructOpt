@@ -13,8 +13,8 @@
     "fitnesses": {
         "LAMMPS": {
             "weight": 1.0,
+            "use_mpi4py": true,
             "kwargs": {
-                "use_mpi4py": true,
                 "MPMD": 0,
                 "keep_files": false,
                 "min_style": "cg",
@@ -31,8 +31,8 @@
     "relaxations": {
         "LAMMPS": {
             "order": 0,
+            "use_mpi4py": true,
             "kwargs": {
-                "use_mpi4py": true,
                 "MPMD": 0,
                 "keep_files": false,
                 "min_style": "cg",

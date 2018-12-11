@@ -1,7 +1,7 @@
 {
     "seed": 0,
     "logging": {},
-    "structure_type": "cluster",
+    "structure_type": "aperiodic",
     "generators": {
         "sphere": {
             "number_of_individuals": 20,

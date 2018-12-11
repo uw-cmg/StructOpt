@@ -17,14 +17,7 @@ Create an environment variable called ``LAMMPS_COMMAND`` that points to the seri
 VASP
 ----
 
-Installation
-============
-
-Follow the `standard installation instructions <http://cms.mpi.univie.ac.at/wiki/index.php/Installing_VASP>`_.
-
-Create an environment variable called ``VASP_COMMAND`` that points to the VASP executable after installation.
-
-`Package Documentation <https://www.vasp.at/index.php/documentation>`_
+VASP currently cannot be run within StructOpt. We have done quite a bit of work to get it running, but it isn't working yet. If you'd like to work on this, please post an issue on github.
 
 
 FEMSIM
@@ -46,11 +39,13 @@ Create an environment variable called ``FEMSIM_COMMAND`` pointing to the newly c
 STEM
 ----
 
+The STEM software is included in the StructOpt repository.
+
 References:  http://pubs.acs.org/doi/abs/10.1021/acsnano.5b05722
 
 
 Creating Your Own Module
 ------------------------
 
-Any forward simulation that takes an atomic model as input and outputs a "fitness" value that can be interpreted as a measure of "goodness" of the structure can be integrated into StructOpt. Contact the developers by making an issue on github to get in touch with us.
+Any forward simulation that takes an atomic model as input and outputs a "fitness" value that can be interpreted as a measure of "goodness" of a structure can be integrated into StructOpt. Contact the developers by making an issue on github to get in touch with us.
 

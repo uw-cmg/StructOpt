@@ -14,6 +14,7 @@ Python Libraries
     pip install ase
     pip install natsorted
     # Install mpi4py from source (below)
+    # Install LAMMPS (if needed)
 
 mpi4py
 ======
@@ -41,12 +42,6 @@ You can test your installation by following `these <http://mpi4py.readthedocs.io
 Installing StructOpt
 --------------------
 
-To get the code, fork and clone the StructOpt repository or download the zip `here <https://github.com/uw-cmg/StructOpt_modular>`_. Add the location of the StructOpt folder (e.g. ``$HOME/repos/StructOpt``) to your ``PATH`` environment variable.
+To get the code, fork and clone the StructOpt repository or download the zip `here <https://github.com/uw-cmg/StructOpt_modular>`_. Add the location of the StructOpt folder (e.g. ``$HOME/repos/StructOpt/v2-experiments-and-energy/structopt``) to your ``PYTHONPATH`` environment variable.
 
 Create an environment variable called ``STRUCTOPT_HOME`` with the same folder location as you added to your path.
-
-
-Additional Modules
-------------------
-
-Depending on the type of calculation you wish to run, you will need to install specific relaxation and fitness modules. VASP and LAMMPS are two examples that function as both a relaxation and fitness. They can both move atoms and relax the structure, and they output an energetic term that quantifies how "good" or fit the input structure is. These modules should be installed using their standard installation procedures unless specified otherwise in the `Modules <>`_ section.

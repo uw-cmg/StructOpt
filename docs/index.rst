@@ -18,11 +18,11 @@ StructOpt is a reverse structure determination toolkit.
 What is reverse structure determination?
 ========================================
 
-Reverse structure determination is a type of structural refinement that iteratively modifies and optimizes a structural model. In atomistic simulations, the positions of the atoms are moved within the model at every step. After the atoms have moved, the structure is evaluated to see how "good" it is. If the structure is "better" than the previous step, the moved atoms are more likely to persist into the next generation. This process is repeated many times until acceptable structure(s) have been generated.
+Reverse structure determination is a type of structural refinement that iteratively modifies an atomic structure by, for example, moving atoms in the structure with the goal to minimize a function (such as system energy). In atomistic simulations, the positions of the atoms are moved within the model at every step. After the atoms have moved, the structure is evaluated to see how "good" it is. If the structure is "better" than the previous step, the moved atoms are more likely to persist into the next generation. This process is repeated many times until acceptable structure(s) have been generated.
 
-Many different metrics can be used to determine how "good" a structure is, and this is often material-dependent. The average energy per atom is one commonly used metric, and others include fits to experimental data (e.g. S(q) or g(r) data), medium-range order information available via FEM measurements, average coordination number, and bond angle constraints.
+Many different metrics can be used to determine how "good" a structure is, and this is often material-dependent. The average energy per atom is one commonly used metric, and others include fits to experimental data (e.g. S(q) or g(r) data), medium-range order information available via FEM measurements, average coordination number, bond angle constraints, etc.
 
-The specific algorithms that can be used in reverse structure determination are numerous and include Monte Carlo, Genetic Algorithm, and Particle Swarm.
+Different optimization algorithms can be used to minimize the different metrics including Monte Carlo, Genetic Algorithm, and Particle Swarm algorithms.
 
 
 Overview of StructOpt
@@ -31,26 +31,11 @@ Overview of StructOpt
 User Documentation
 ------------------
 
-StructOpt is a structure optimization framework that incorportates multiple forward simulation techniques into its optimization scheme with the goal of identifying stable and realistic atomic structures. It is designed with modularity in mind, and encourages simplicity in both its codebase and usage without sacrificing powerful functionality. Nearly any forward simulation technique that takes an atomic model as input and outputs a fitness value can be integrated into this framework.
+StructOpt is a structure optimization framework that incorportates multiple forward simulation techniques into its optimization scheme with the goal of identifying stable and realistic atomic structures. It is designed with modularity in mind. Nearly any forward simulation technique that takes an atomic model as input and outputs a fitness value can be integrated into this framework.
 
-This documentation serves as both a user and developer guide for StructOpt.
+This documentation serves as both a user and developer guide for StructOpt. However, parts of this documentation are likely lacking. If you have questions, please post them as an issue on github.
 
-StructOpt serves the purpose of structure refinment for multiple different materials including nanoparticles, defects, and metallic glasses. As such, it is highly customizable and extendable. There are many different types of simulations that can be set up, which requires getting to know the relevent parameters. Multiple examples are included in this documentation and comments (via issues on our `github page <https://github.com/uw-cmg/StructOpt_modular>`_) are welcome.
-
-The :ref:`examples` section provides multiple examples of basic StructOpt configurations. Details on the inputs and outputs can be found in the :ref:`parameters` and :ref:`outputs` sections, respectively. Details on the many options currently available for StructOpt are provided in the :ref:`parameters` section of this document.  An explanation of commonly generated errors and troubleshooting advice is provided in the section entitled :ref:`troubleshooting`.
-
-Developer Documentation
------------------------
-
-Architecture Details
-""""""""""""""""""""
-
-.. toctree::
-    :maxdepth: 1
-
-    core_concepts
-    parallelism/index
-
+StructOpt serves the purpose of structure refinment for multiple different materials including nanoparticles and metallic glasses and is highly customizable and extendable to new structure types. There are many different types of simulations that can be set up, which requires getting to know the relevent parameters. Examples are included in the github repository and comments via issues on our `github page <https://github.com/uw-cmg/StructOpt>`_ are welcome.
 
 Contents
 ========
@@ -58,21 +43,22 @@ Contents
 .. toctree::
     :maxdepth: 1
 
+    core_concepts
     setup
     parameters
     outputs
     examples
+    parallelism/index
     job_manager
     calculators/index
     why_python
-    future
     troubleshooting
     API Reference <structopt/index>
 
 Contributing
 ============
 
-Bug fixes and error reports are always welcome. We accept PRs and will try to fix issues that have detailed descriptions and are reproducable in a timely fashion.
+Bug fixes and error reports are always welcome. We accept PRs and will try to fix issues that have detailed descriptions and are reproducable.
 
 If you have a forward simulation module that you wish to contribute, please make an issue and the correct people will get email notifications so we can respond.
 
