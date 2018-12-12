@@ -1,6 +1,6 @@
 {
     "logging": {},
-    "structure_type": "crystal",
+    "structure_type": "periodic",
     "generators": {
         "sphere": {
             "number_of_individuals": 10,
@@ -13,9 +13,9 @@
     "fitnesses": {
         "LAMMPS": {
             "weight": 1.0,
+            "use_mpi4py": true,
+            "MPMD": 0,
             "kwargs": {
-                "use_mpi4py": true,
-                "MPMD": 0,
                 "keep_files": false,
                 "min_style": "cg",
                 "min_modify": "line quadratic",
@@ -27,11 +27,11 @@
         },
         "FEMSIM": {
             "weight": 10.0,
+            "use_mpi4py": false,
+            "MPMD": "8-20",
             "kwargs": {
-                "use_mpi4py": false,
-                "MPMD": "8-20",
-                "parameter_filename": "$STRUCTOPT_HOME/examples/crystal/MG_Al/497.in",
-                "vk_data_filename": "$STRUCTOPT_HOME/examples/crystal/MG_Al/phantom_497.txt",
+                "parameter_filename": "$STRUCTOPT_HOME/examples/genetic/periodic/Al-metallic-glass/497.in",
+                "vk_data_filename": "$STRUCTOPT_HOME/examples/genetic/periodic/Al-metallic-glass/phantom_497.txt",
                 "xsize": 19.686667,
                 "ysize": 19.686667,
                 "zsize": 19.686667,
@@ -46,9 +46,9 @@
     "relaxations": {
         "LAMMPS": {
             "order": 0,
+            "use_mpi4py": true,
+            "MPMD": 0,
             "kwargs": {
-                "use_mpi4py": true,
-                "MPMD": 0,
                 "keep_files": false,
                 "min_style": "cg",
                 "min_modify": "line quadratic",
