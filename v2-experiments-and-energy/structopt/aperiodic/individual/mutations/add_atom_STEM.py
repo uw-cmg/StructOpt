@@ -32,7 +32,7 @@ def add_atom_STEM(individual, STEM_parameters, add_prob=None, permute=0.5,
         Defaults to the average bond distance
     """
 
-    module = STEM(STEM_parameters)
+    module = STEM({'kwargs': STEM_parameters})
     module.generate_target()
     target = module.target
 
@@ -45,7 +45,7 @@ def add_atom_STEM(individual, STEM_parameters, add_prob=None, permute=0.5,
     cutoff = avg_bond_length * 1.1
     surf_cutoff *= cutoff
     column_cutoff *= cutoff
-    resolution = module.parameters['resolution']
+    resolution = module.parameters['kwargs']['resolution']
     size = cutoff * resolution * filter_size
 
     ###################################

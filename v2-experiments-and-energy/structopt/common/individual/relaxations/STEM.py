@@ -36,11 +36,11 @@ class STEM(structopt.common.individual.fitnesses.STEM):
 
     def __init__(self, parameters=None):
         if parameters is None:
-            parameters = {}
-        parameters.setdefault('rotation_grid', 10)
-        parameters.setdefault('rotation_iterations', 2)
-        parameters.setdefault('surface_moves', 10)
-        parameters.setdefault('filter_size', 1)
+            parameters = {'kwargs': {}}
+        parameters['kwargs'].setdefault('rotation_grid', 10)
+        parameters['kwargs'].setdefault('rotation_iterations', 2)
+        parameters['kwargs'].setdefault('surface_moves', 10)
+        parameters['kwargs'].setdefault('filter_size', 1)
 
         super().__init__(parameters)
 
@@ -58,8 +58,8 @@ class STEM(structopt.common.individual.fitnesses.STEM):
         print("Relaxing individual {} on rank {} with STEM".format(individual.id, rank))
 
         # Relax the atom by rotating it
-        steps = self.parameters['rotation_grid']
-        for i in range(self.parameters['rotation_iterations']):
+        steps = self.parameters.kwargs['rotation_grid']
+        for i in range(self.parameters.kwargs['rotation_iterations']):
             bonds = self.get_bulk_bonds(individual)
             projection = self.get_STEM_projection(individual)
             solution = brute(self.epsilon,
@@ -159,14 +159,14 @@ class STEM(structopt.common.individual.fitnesses.STEM):
         # Get a cutoff between maximum points in the STEM image based
         # on nearest neighbor distances
         cutoff = get_avg_radii(individual) * 2 * 1.1
-        size = cutoff * parameters['resolution'] * parameters['filter_size']
+        size = cutoff * parameters.kwargs['resolution'] * parameters.kwargs['filter_size']
 
         # Get a list of xy positions from analyzing local maxima in STEM image
         # as well as the position of a spot near the center of mass
         data_max = filters.maximum_filter(target, size=size)
         maxima = ((target == data_max) & (target > 0.1)) # Filter out low maxima
-        com = np.asarray(center_of_mass(target)[::-1]) / parameters['resolution']
-        pos = np.argwhere(maxima)[:,::-1] / parameters['resolution']
+        com = np.asarray(center_of_mass(target)[::-1]) / parameters.kwargs['resolution']
+        pos = np.argwhere(maxima)[:,::-1] / parameters.kwargs['resolution']
         dists_from_com = np.linalg.norm(pos - com, axis=1)
         prob = dists_from_com / sum(dists_from_com)
         bulk_atom_index = np.random.choice(list(range(len(dists_from_com))), p=prob)
@@ -181,18 +181,18 @@ class STEM(structopt.common.individual.fitnesses.STEM):
 
             fig, ax = plt.subplots(num=1)
             fig.colorbar(ax.pcolormesh(target, cmap=cm.viridis, linewidths=0))
-            ax.set_xlim((0, parameters['dimensions'][0] * parameters['resolution']))
-            ax.set_ylim((0, parameters['dimensions'][1] * parameters['resolution']))
+            ax.set_xlim((0, parameters.kwargs['dimensions'][0] * parameters.kwargs['resolution']))
+            ax.set_ylim((0, parameters.kwargs['dimensions'][1] * parameters.kwargs['resolution']))
 
             fig, ax = plt.subplots(num=2)
             fig.colorbar(ax.pcolormesh(data_max, cmap=cm.viridis, linewidths=0))
-            ax.set_xlim((0, parameters['dimensions'][0] * parameters['resolution']))
-            ax.set_ylim((0, parameters['dimensions'][1] * parameters['resolution']))
+            ax.set_xlim((0, parameters.kwargs['dimensions'][0] * parameters.kwargs['resolution']))
+            ax.set_ylim((0, parameters.kwargs['dimensions'][1] * parameters.kwargs['resolution']))
 
             fig, ax = plt.subplots(num=3)
             fig.colorbar(ax.pcolormesh(maxima, cmap=cm.viridis, linewidths=0))
-            ax.set_xlim((0, parameters['dimensions'][0] * parameters['resolution']))
-            ax.set_ylim((0, parameters['dimensions'][1] * parameters['resolution']))
+            ax.set_xlim((0, parameters.kwargs['dimensions'][0] * parameters.kwargs['resolution']))
+            ax.set_ylim((0, parameters.kwargs['dimensions'][1] * parameters.kwargs['resolution']))
 
             plt.show()
 

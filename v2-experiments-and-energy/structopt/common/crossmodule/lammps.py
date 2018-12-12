@@ -5,7 +5,7 @@ import shutil
 import decimal as dec
 from tempfile import mkdtemp, NamedTemporaryFile, mktemp as uns_mktemp
 from re import compile as re_compile, IGNORECASE
-from subprocess import Popen, PIPE, TimeoutExpired
+import subprocess
 from ase.calculators.lammpsrun import Prism
 
 from structopt.io import write_data
@@ -214,7 +214,7 @@ class LAMMPS(object):
         return
 
 
-    def run(self, parameters, input_file):
+    def run(self, parameters, input_fn):
         if 'LAMMPS_COMMAND' in os.environ:
             lammps_cmd_line = os.environ['LAMMPS_COMMAND']
         else:
@@ -222,19 +222,20 @@ class LAMMPS(object):
             shutil.rmtree(self.tmp_dir)
             raise RuntimeError('Set LAMMPS_COMMAND environment variable')
 
-        input_file = open(input_file)
-        p = Popen([lammps_cmd_line], stdin=input_file, stdout=PIPE, stderr=PIPE)
+        input_file = open(input_fn)
         try:
-            output, error = p.communicate(timeout=parameters['timeout'])
-        except TimeoutExpired:
+            p = subprocess.run(lammps_cmd_line, stdin=input_file, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=parameters['timeout'], shell=False, check=False)
+            output, error = p.stdout, p.stderr
+        except subprocess.TimeoutExpired:
             print("Timed out!")    
             return "Timed out!"
+        input_file.close()
 
         self.output = output.decode('utf-8').split('\n')[:-1]
 
         # Check if the calculation completed without errors. If it does,
         # we need to save the files self.calcdir.
-        if len(self.output) == 0 or CALCULATION_END_MARK not in self.output[-1]:
+        if len(self.output) == 0 or CALCULATION_END_MARK not in self.output[-2]:
             return "No output or no CALCULATION_END_MARK"
 
         return False

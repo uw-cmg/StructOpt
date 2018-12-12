@@ -3,7 +3,7 @@
     "structure_type": "aperiodic",
     "generators": {
         "sphere": {
-            "number_of_individuals": 18,
+            "number_of_individuals": 20,
             "kwargs": {
                 "atomlist": [["Pt", 561]],
                 "cell": [40.0, 40.0, 40.0]

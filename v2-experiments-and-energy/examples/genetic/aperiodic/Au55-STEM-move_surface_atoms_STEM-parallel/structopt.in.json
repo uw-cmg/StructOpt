@@ -14,8 +14,8 @@
     "fitnesses": {
         "LAMMPS": {
             "weight": 1.0,
+            "use_mpi4py": true,
 	        "kwargs": {
-                "use_mpi4py": true,
 	            "MPMD": 0,
 	            "keep_files": false,
 	            "min_style": "cg",
@@ -30,8 +30,8 @@
         },
         "STEM": {
             "weight": 1.0,
+            "use_mpi4py":true,
             "kwargs": {
-                "use_mpi4py":true,
                 "target": "Au55-decahedron.xyz",
                 "HWHM": 0.4,
                 "dimensions": [20.0, 20.0],
@@ -44,8 +44,8 @@
     "relaxations": {
         "LAMMPS": {
             "order": 0,
+            "use_mpi4py": true,
             "kwargs": {
-                "use_mpi4py": true,
 	            "MPMD": 0,
 	            "keep_files": false,
 	            "min_style": "cg",
@@ -59,8 +59,8 @@
         },
         "STEM": {
             "order": 1,
+            "use_mpi4py": true,
             "kwargs": {
-                "use_mpi4py": true,
                 "target": "Au55-decahedron.xyz",
                 "HWHM": 0.4,
                 "dimensions": [20.0, 20.0],
@@ -93,9 +93,7 @@
             }
         }
     },
-    "fingerprinters": {
-        "options": []
-    },
+    "fingerprinters": {},
     "crossovers": {
         "rotate": {"probability": 0.7}
     },

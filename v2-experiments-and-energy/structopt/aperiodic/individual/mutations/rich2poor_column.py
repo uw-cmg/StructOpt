@@ -15,7 +15,7 @@ def rich2poor_column(individual, STEM_parameters, filter_size=0.5,
 
     NN_list = NeighborList(individual)
     
-    module = STEM(STEM_parameters)
+    module = STEM({'kwargs': STEM_parameters})
     module.generate_target()
 
     image = module.get_image(individual)
@@ -24,7 +24,7 @@ def rich2poor_column(individual, STEM_parameters, filter_size=0.5,
     avg_bond_length = get_avg_radii(individual) * 2
     cutoff = avg_bond_length * 1.1
     column_cutoff *= cutoff
-    resolution = module.parameters['resolution']        
+    resolution = module.parameters['kwargs']['resolution']        
     size = cutoff * resolution * filter_size
 
     image_max = filters.maximum_filter(image, size=size)

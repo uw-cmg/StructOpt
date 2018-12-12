@@ -16,7 +16,7 @@ def permute_column_STEM(individual, STEM_parameters, filter_size=1,
 
     """
 
-    module = STEM(STEM_parameters)
+    module = STEM({'kwargs': STEM_parameters})
     module.generate_target()
     target = module.target
 
@@ -28,7 +28,7 @@ def permute_column_STEM(individual, STEM_parameters, filter_size=1,
     # Find a list of local maximum and local minimum in the image
     cutoff = get_avg_radii(individual) * 2 * 1.1
     column_cutoff *= cutoff
-    resolution = module.parameters['resolution']        
+    resolution = module.parameters['kwargs']['resolution']        
     size = cutoff * resolution * filter_size
 
     image_max = filters.maximum_filter(image, size=size)

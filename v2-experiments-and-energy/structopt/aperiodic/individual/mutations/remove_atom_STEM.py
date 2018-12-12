@@ -35,7 +35,7 @@ def remove_atom_STEM(individual, STEM_parameters, permute=True, remove_prob=None
         Defaults to the average bond distance
     """
 
-    module = STEM(STEM_parameters)
+    module = STEM({'kwargs': STEM_parameters})
     module.generate_target()
     target = module.target
 
@@ -47,7 +47,7 @@ def remove_atom_STEM(individual, STEM_parameters, permute=True, remove_prob=None
     cutoff = get_avg_radii(individual) * 2 * 1.1
     remove_cutoff *= cutoff
     column_cutoff *= cutoff
-    resolution = module.parameters['resolution']
+    resolution = module.parameters['kwargs']['resolution']
     size = cutoff * resolution * filter_size    
 
     ###################################

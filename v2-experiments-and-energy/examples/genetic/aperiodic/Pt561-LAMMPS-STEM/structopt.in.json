@@ -4,7 +4,7 @@
     "structure_type": "aperiodic",
     "generators": {
         "fcc": {
-            "number_of_individuals": 18,
+            "number_of_individuals": 20,
             "kwargs": {
                 "atomlist": [["Pt", 561]],
                 "orientation": "100",
@@ -16,8 +16,8 @@
     "fitnesses": {
         "LAMMPS": {
             "weight": 1.0,
+            "use_mpi4py": true,
             "kwargs": {
-                "use_mpi4py": true,
                 "MPMD": 0,
                 "keep_files": false,
                 "min_style": "cg",
@@ -32,8 +32,8 @@
         },
         "STEM": {
             "weight": 100,
+            "use_mpi4py": true,
             "kwargs": {
-                "use_mpi4py": true,
                 "target": "$STRUCTOPT_HOME/examples/genetic/aperiodic/Pt561-LAMMPS-STEM/Pt561-cuboctahedron.xyz",
                 "HWHM": 0.4,
                 "dimensions": [40.0, 40.0],
@@ -46,8 +46,8 @@
     "relaxations": {
         "LAMMPS": {
             "order": 0,
+            "use_mpi4py": true,
             "kwargs": {
-                "use_mpi4py": true,
                 "MPMD": 0,
                 "keep_files": false,
                 "min_style": "cg",
@@ -61,8 +61,8 @@
         },
         "STEM": {
             "order": 1,
+            "use_mpi4py": true,
             "kwargs": {
-                "use_mpi4py": true,
                 "target": "$STRUCTOPT_HOME/examples/genetic/aperiodic/Pt561-LAMMPS-STEM/Pt561-cuboctahedron.xyz",
                 "HWHM": 0.4,
                 "dimensions": [40.0, 40.0],
@@ -83,7 +83,6 @@
             "probability": 0.3,
             "kwargs": {
                 "STEM_parameters": {
-                    "use_mpi4py": true,
                     "target": "$STRUCTOPT_HOME/examples/genetic/aperiodic/Pt561-LAMMPS-STEM/Pt561-cuboctahedron.xyz",
                     "HWHM": 0.4,
                     "dimensions": [40.0, 40.0],

@@ -25,7 +25,7 @@ def permutation_STEM(individual, STEM_parameters, filter_size=0.5,
         Defaults to the average bond distance
     """
 
-    module = STEM(STEM_parameters)
+    module = STEM({'kwargs': STEM_parameters})
     module.generate_target()
     target = module.target
 
@@ -49,7 +49,7 @@ def permutation_STEM(individual, STEM_parameters, filter_size=0.5,
     # Find a list of local maximum and local minimum in the image
     cutoff = get_avg_radii(individual) * 2 * 1.1
     move_cutoff *= cutoff
-    resolution = module.parameters['resolution']
+    resolution = module.parameters['kwargs']['resolution']
     size = cutoff * resolution * filter_size
 
     data_max = filters.maximum_filter(contrast, size=size)
