@@ -5,3 +5,9 @@ StructOpt is a Structure Optimization suite designed for materials with complica
 StructOpt's most developed optimizer is the genetic algorithm, but particle swarm and monte carlo functionality are available. The user can also develop their own optimizers that simply use the material-modification API to modify and transform structructres. In this way, a new optimizer can take advantage of the complex transformations that are already in use by the genetic algorithm, for example.
 
 StructOpt serves the purpose of structure refinment for multiple different materials including nanoparticles, defects, and metallic glasses. As such, it is highly customizable and extendable, and there are many different types of simulations that can be set up.
+
+### Citing StructOpt
+
+The manuscript is in the submission process.
+
+A snapshot of the code at the time of publication can be found here: https://github.com/uw-cmg/StructOpt/releases/tag/0.1
