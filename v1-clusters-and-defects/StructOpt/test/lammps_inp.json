@@ -1,0 +1,9 @@
+{
+    "pair_style": "eam",
+    "pot_file": "Au_u3.eam",
+    "parallel": true,
+    "keep_files": false,
+    "min_style": "cg\nmin_modify line quadratic",
+    "minimize": "1e-8 1e-8 5000 10000",
+    "thermo_steps": 1
+}

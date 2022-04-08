@@ -1,0 +1,5 @@
+# Parameter file FEMSIM
+anatase_tio2_4000K.xyz
+./vk_TiO2_R14Ang_032020.txt
+0.0453969
+1 80 40

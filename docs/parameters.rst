@@ -2,66 +2,78 @@
 
 Input Parameters
 ################
-The input parameters is a JSON file, which holds a single dictionary. Due to the modular nature of StructOpt, the input file is a dictionary of embedded dictionary, where dictionary key and values often determine the function name and kwargs, respectively. An example Au nanoparticle input file is given below. Each part will be discussed in the following sections.
+The input parameters are defined in a JSON file as a single dictionary. Due to the modular nature of StructOpt, the input file is a dictionary of dictionaries where keys and values often relate directly to function names and kwargs.
+
+The parameters for a simulation can be defined in the optimizer file using ``structopt.setup(parameters)`` where ``parameters`` is either a filename or a dictionary.
+
+The parameters for a simple Au nanoparticle example that finds the lowest energy configuration using an EAM potential in LAMMPS is given blow. Each part of the parameters will be discussed in the following sections.
 
 Example::
 
   {
     "seed": 0,
-    "structure_type": "cluster",
+    "structure_type": "aperiodic",
     "generators": {
-	"fcc": {"number_of_individuals": 5,
-		"kwargs": {"atomlist": [["Au", 55]],
-                           "orientation": "100",
-			   "cell": [20, 20, 20],
-                           "a": 4.08}}
+        "fcc": {
+            "number_of_individuals": 5,
+            "kwargs": {
+                "atomlist": [["Au", 55]],
+                "orientation": "100",
+                "cell": [20, 20, 20],
+                "a": 4.08
+            }
+        }
     },
     "fitnesses": {
-        "LAMMPS": {"weight": 1.0, 
-	           "kwargs": {"use_mpi4py": false,
-	                      "MPMD": 0,
-	                      "keep_files": true,
-	                      "min_style": "cg",
-                              "min_modify": "line quadratic",
-	                      "minimize": "1e-8 1e-8 5000 10000",
-	                      "pair_style": "eam",
-	                      "potential_file": "$STRUCTOPT_HOME/potentials/Au_u3.eam",
-	                      "thermo_steps": 0,
-                              "reference": {"Au": -3.930}}}
+        "LAMMPS": {
+            "weight": 1.0, 
+            "use_mpi4py": false,
+	        "kwargs": {
+	            "MPMD": 0,
+	            "keep_files": true,
+	            "min_style": "cg",
+                "min_modify": "line quadratic",
+	            "minimize": "1e-8 1e-8 5000 10000",
+	            "pair_style": "eam",
+	            "potential_file": "$STRUCTOPT_HOME/potentials/Au_u3.eam",
+	            "thermo_steps": 0,
+                "reference": {"Au": -3.930}
+            }
+        }
     },
     "relaxations": {
-        "LAMMPS": {"order": 0,
-                   "kwargs": {"use_mpi4py": false,
-	                      "MPMD": 0,
-	                      "keep_files": true,
-	                      "min_style": "cg",
-                              "min_modify": "line quadratic",
-	                      "minimize": "1e-8 1e-8 5000 10000",
-	                      "pair_style": "eam",
-	                      "potential_file": "$STRUCTOPT_HOME/potentials/Au_u3.eam",
-	                      "thermo_steps": 0}}
+        "LAMMPS": {
+            "order": 0,
+            "use_mpi4py": false,
+            "kwargs": {
+	            "MPMD": 0,
+	            "keep_files": true,
+	            "min_style": "cg",
+                "min_modify": "line quadratic",
+	            "minimize": "1e-8 1e-8 5000 10000",
+	            "pair_style": "eam",
+	            "potential_file": "$STRUCTOPT_HOME/potentials/Au_u3.eam",
+	            "thermo_steps": 0
+            }
+        }
     },
     "convergence": {
         "max_generations": 10
     },
     "mutations": {
-	"move_surface_atoms": {"probability": 0.0},
+	    "move_surface_atoms": {"probability": 0.0},
         "move_atoms": {"probability": 0.0},
         "move_atoms_group": {"probability": 0.0},
-	"rotate_atoms": {"probability": 0.0},
-	"rotate_cluster": {"probability": 0.0},
+	    "rotate_atoms": {"probability": 0.0},
+	    "rotate_cluster": {"probability": 0.0},
         "rotate_all": {"probability": 0.0},
         "move_surface_defects": {"probability": 1.0}
     },
     "crossovers": {
-        "rotate": {"probability": 0.7,
-                   "kwargs": {"repair_composition": true}}
+        "rotate": {"probability": 0.7, "kwargs": {"repair_composition": true}}
     },
     "predators": {
-        "fuss": {"probability": 0.9},
-        "diversify_module": {"probability": 0.1,
-                             "kwargs": {"module": "LAMMPS",
-                                        "min_diff": 0.01}}
+        "fuss": {"probability": 1.0}
     },
     "selections": {
         "rank": {"probability": 1.0}
@@ -71,52 +83,46 @@ Example::
 Global Parameters
 =================
 
-Global parameters are those that determine how the optimizer should run.
+Global parameters define parameters that pertain to the entire simulation.
 
 structure_type
 ++++++++++++++
 
-``structure_type`` (str) is a key parameter for determining operations will be run. Currently, only cluster is supported, but StructOpt is written in a way that *how* the operations are carried out is seperated from the operations themselves. Hence, one can easily write new crossover, mutation, selection, and predator operations that are unique to their structure, test them, and incorporate them inside StructOpt seamlessly.
+``structure_type`` ``(str)``: Defines the type of material being optimized. StructOpt currently supports the ``periodic`` and ``aperiodic`` structure types. The ``periodic`` structure type defines periodic boundary conditions in all three directions, and the ``aperiodic`` structure type has no periodic boundary conditions.
 
 seed
 ++++
-``seed`` (int): seed for the psuedo-random number generator. Two runs with the exact same input *and* seed should run exactly the same way. Almost all operations use random number generators. See should be an int.
+``seed`` ``(int)``: The seed for the psuedo-random number generator. Two runs with identical input and seed should run identically (however, in rare cases rounding errors in the machine may cause some selection schemes to choose different individuals in runs that should be identical).
 
 convergence
 +++++++++++
 
-``convergence`` (dict): Convergence is a dictionary that determines when to stop the calculation. Currently, the only convergence criteria is ``max_generations``, which is set to an int. For example, the setting below runs the optimizer for 200 generations.
+``convergence`` ``(dict)``: Convergence is a dictionary that defines when to stop the calculation. Currently, the only convergence criteria is ``max_generations``, which is set to an int. For example, the setting below parameters will run the optimizer for 200 generations.
 
 Example::
 
-    "convergence": {
-        "max_generations": 200
-    }
-
-In the future, more ``convergence`` options will be added.
+    "convergence": {"max_generations": 200}
 
 post_processing
 +++++++++++++++
 
-``post_processing`` (dict): Determines what is output as the optimizer is run. Currently, the only option is ``XYZs``, which determines how frequentely the xyz files of each generation should be printed. The rules for this are as follows.
+``post_processing`` ``(dict)``: Determines the outputs of the simulation. Currently, the only option is ``XYZs``, which determines how frequentely the xyz files of each generation should be printed. The rules for this are as follows.
 
 - ``XYZs`` = 0: all generations are kept
 - ``XYZs`` > 0: every ``XYZs`` generation is kept
 - ``XYZs`` < 0: the last ``XYZs`` generations are kept
 
-The below example is a run where only the last generation is kept. This behavior is by default and encouraged for saving space.
+The below example is a run where only the last generation is kept (this is the default behavior because saving every individual is both time and disk-space intensive).
   
 Example::
 
-    "post_processing": {
-        "XYZs": -1
-    }
+    "post_processing": {"XYZs": -1}
 
 
 Generators
 ==================
 
-Generators are functions for initializing the population. These are pseudo-random generators that depend on the ``seed`` global parameter.
+Generators are functions for initializing the population. They are pseudo-random generators that depend on the ``seed`` global parameter.
 
 Generators are given as a dictionary entry defined by the ``generators`` key in the input file. The structure of the generators dictionary with *N* desired generators is given below.
 
@@ -134,19 +140,23 @@ Example::
                       "kwargs": kwargs_N}
     }
 
-The string for *generator_i*, is the name of the generator one wants to use. The number of individuals that generator should generate is determined by the integer *n_i*. The sum of all *n_i* values determines the total size of the population, which is fixed throughout the run. *kwargs_i* are dictionaries that input the kwargs to the generator function one is using. These will be specific to the function and can be found in their help function, show below.
+The string for *generator_i*, is the name of the generator one wants to use. The number of individuals that generator should generate is determined by the integer *n_i*. The sum of all *n_i* values determines the total size of the population, which is fixed throughout the run unless code is added to the optimizer to change the population size. *kwargs_i* are dictionaries that define the kwargs to the generator function being used. The kwargs are specific to the function and can be found in their help function, show below.
 
-.. autofunction:: structopt.cluster.individual.generators.ellipsoid
+.. autofunction:: structopt.common.individual.generators.read_xyz
 
-.. autofunction:: structopt.cluster.individual.generators.sphere
+.. autofunction:: structopt.common.individual.generators.read_extxyz
 
-.. autofunction:: structopt.cluster.individual.generators.fcc
+.. autofunction:: structopt.aperiodic.individual.generators.sphere
+
+.. autofunction:: structopt.aperiodic.individual.generators.ellipsoid
+
+.. autofunction:: structopt.aperiodic.individual.generators.fcc
 
     
 Crossovers
 ==========
 
-Crossovers are operations for mating two individuals chosen by a selection algorithm. The purpose of the crossover is to intelligently combine (mate) different individuals (parents) in a way to create new individuals (children) that have the features of the current best individuals in the population.
+Crossovers are operations for combing two individuals chosen by a selection algorithm. The purpose of the crossover is to intelligently combine (mate) different individuals (parents) in a way to create new individuals (children) that have the features of the parents. Often the parents are chosen to be the best individuals in the population.
 
 Crossovers are given as a dictionary entry defined by the ``crossovers`` key in the input file. The structure of the crossovers dictionary with *N* desired selections is given below.
 
@@ -164,16 +174,16 @@ Example::
                       "kwargs": kwargs_N}
     }
 
-The string for *crossover_i*,  is the name of the crossover one wants to use. The probability *p_i* is the probability of the crossover occuring if a mate is determined to happen in the population. *p_i* values should sum to 1. *kwargs_i* are dictionaries that input the kwargs to the crossover function one is using. These will be specific to the function and can be found in their help function.
+The string for *crossover_i*, is the name of the crossover that will be used. The probability *p_i* is the probability of the crossover occuring if a mate is determined to happen in the population. *p_i* values should sum to 1. *kwargs_i* are dictionaries that input the kwargs to the crossover function being used. These kwargs will be specific to the function and can be found in their help function.
 
 Currently the only crossover in use in the algorithm is the cut-and-splice operator introduced by Deaven and Ho. The description is shown below.
 
-.. autofunction:: structopt.cluster.population.crossovers.rotate
+.. autofunction:: structopt.common.population.crossovers.rotate
 
 Selections
 ==========
 
-Selections are operations for choosing which individuals to "mate" in producing new individuals. Individuals are chosen based on their fitness, and different selection functions determine how diverse the children should be.
+Selections are operations for choosing which individuals to "mate" when producing new individuals. Individuals are chosen based on their fitness, and different selection functions determine how which individuals will be mated. The selection scheme impacts the diversity of subsequent populations.
 
 Selections are given as a dictionary entry defined by the ``selections`` key in the input file. The structure of the selections dictionary with *N* desired selections is given below.
 
@@ -207,9 +217,9 @@ The string for *selection_i*,  is the name of the selection one wants to use. Th
 Predators
 =========
 
-Similar to selections, predators are selection processes that selects individuals based on their fitness. The distinction is that while selections select individuals with positive features to duplicate in children, predators select which individuals to keep in the next generation. Note, this must be done because crossovers and (sometimes) mutations increase the population every generation, and hence each generation requires a predator step.
+Similar to selections, predators are selection processes that select individuals based on their fitness. The distinction is that while selections select individuals with positive features to duplicate in children, predators select which individuals to keep in the next generation. Note, this must be done because crossovers and mutations increase the population every generation, and hence each generation requires a predator step.
 
-Predators are given as a dictionary entry defined by the ``predators`` key in the input file. The structure of the predators dictionary with *N* desired predators is given below
+Predators are given as a dictionary entry defined by the ``predators`` key in the input file. The structure of the predators dictionary with *N* desired predators is given below.
 
 Example::
 
@@ -237,14 +247,12 @@ The string for *predator_i*, is the name of the predator one wants to use. The p
 
 .. autofunction:: structopt.common.population.predators.tournament
 
-.. autofunction:: structopt.common.population.predators.diversify_module
-                  
 Mutations
 =========
 
-Mutations are operations applied to individuals that change its structure and composition. It is a local search operation, though the mutation itself can be written to perform small or larger changes.
+Mutations are operations applied to an individual that changes its structure and composition. It is a local search operation, although the mutation itself can be written to perform small or larger changes.
 
-Mutations are given as a dictionary entry defined by the ``mutations`` key in the input file. The structure of the mutations dictionary with *N* desired mutations is given below
+Mutations are given as a dictionary entry defined by the ``mutations`` key in the input file. The structure of the mutations dictionary with *N* desired mutations is given below.
 
 Example::
 
@@ -263,54 +271,19 @@ Example::
                      "kwargs": kwargs_N}
     }
 
-The string for *mutation_i*,  is the name of the mutation one wants to use. The probability *p_i* is the probability of the mutation occuring on every individual in the population. *p_i* values should sum to any value between 0 and 1. *kwargs_i* are dictionaries that input the kwargs to the mutation function one is using. These will be specific to the function and can be found in their help function.
+The string for *mutation_i*,  is the name of the mutation being used. The probability *p_i* is the probability of the mutation occuring on every individual in the population. *p_i* values should sum to any value between 0 and 1. *kwargs_i* are dictionaries that input the kwargs to the mutation function being used. These will be specific to the function and can be found in their help function.
 
-In addition to specifying the mutations you want to use, the ``mutations`` dictionary takes three special kwargs: ``preserve_best``, ``keep_original``, and ``keep_original_best``. Setting ``preserve_best`` to ``true``, means the highest fitness individual will **never** be mutated. Setting ``keep_original`` to ``true`` means mutations will be applied to copies of individuals, not the individual itself. This means, the original individual is not changed through a mutation. ``keep_original_best`` applies ``keep_original`` to only the best individual.
+In addition to specifying the mutations to use, the ``mutations`` dictionary takes three special kwargs: ``preserve_best``, ``keep_original``, and ``keep_original_best``. Setting ``preserve_best`` to ``true``, means the highest fitness individual will **never** be mutated. Setting ``keep_original`` to ``true`` means mutations will be applied to copies of individuals, not the individuals themselves. This means the original individual is not changed during a mutation. ``keep_original_best`` applies ``keep_original`` to only the best individual.
 
-The currently implemented mutations are shown below. Note in all functions, the first argument is the atomic structure, which inserted by the optimizer. The user defines all of the other kwargs *after* the first input.
+The currently implemented mutations can be found in the ``structopt/*/individual/mutations`` folders depending on the structure typing being used. Note in all functions, the first argument is the atomic structure, which inserted by the optimizer. The user defines all of the other kwargs *after* the first input.
 
-.. autofunction:: structopt.common.individual.mutations.swap_positions
-
-.. autofunction:: structopt.common.individual.mutations.swap_species
-
-.. autofunction:: structopt.common.individual.mutations.rotate_atoms
-
-.. autofunction:: structopt.common.individual.mutations.rotate_all
-
-.. autofunction:: structopt.common.individual.mutations.permutation
-
-.. autofunction:: structopt.common.individual.mutations.rattle
-
-.. autofunction:: structopt.cluster.individual.mutations.move_atoms
-
-.. autofunction:: structopt.cluster.individual.mutations.move_surface_atoms
-
-.. autofunction:: structopt.cluster.individual.mutations.rotate_cluster
-                  
-.. autofunction:: structopt.cluster.individual.mutations.twist
-
-.. autofunction:: structopt.cluster.individual.mutations.swap_core_shell
-
-.. autofunction:: structopt.cluster.individual.mutations.rich2poor
-
-.. autofunction:: structopt.cluster.individual.mutations.poor2rich
-
-.. autofunction:: structopt.cluster.individual.mutations.move_surface_defects
-
-.. autofunction:: structopt.cluster.individual.mutations.enrich_surface
-
-.. autofunction:: structopt.cluster.individual.mutations.enrich_bulk
-
-.. autofunction:: structopt.cluster.individual.mutations.enrich_surface_defects
-
-.. autofunction:: structopt.cluster.individual.mutations.enrich_surface_facets
 
 Relaxations
 ===========
 
-Relaxations performs a local relaxation to the atomic structure before evaluating their fitness. This is typically done after crossover and mutation operators are applied.
+Relaxations perform a local relaxation to the atomic structure before evaluating their fitness. This is typically done after crossover and mutation operators are applied.
 
-Relaxations differ than the previous operations in that they require varying amounts of resources. Hence, a subsequent section, Parallelization, will introduce ways to run your job with varying levels of parallel performance.
+Relaxations differ from the previous operations in that they require varying amounts of resources. Hence, a subsequent section, Parallelization, will introduce ways to run your job with varying levels of parallel performance.
 
 Relaxations are given as a dictionary entry defined by the ``relaxations`` key in the input file. The structure of these dictionaries is shown below.
 
@@ -328,16 +301,16 @@ Example::
                        "kwargs": kwargs_N}
     }
 
-The string for *relaxation_i*,  is the name of the relaxation one wants to use. The order *o_i* is the order of the relaxation occuring on every individual in the population. *kwargs_i* are dictionaries that input the kwargs to the relaxation function one is using. These will be specific to the function. More details of each relaxation module will be given in the following subsections
+The string for *relaxation_i*, is the name of the relaxation being used. The order *o_i* is the order of the relaxation occuring on every individual in the population. *kwargs_i* are dictionaries that input the kwargs to the relaxation function being used. These will be specific to the function. More details of each relaxation module will be given in the following subsections.
 
 LAMMPS
 ++++++
 
-The LAMMPS relaxation module calls LAMMPS to relax according to some potential. Most of the kwargs can be found from the LAMMPS documentation.
+The LAMMPS relaxation module calls LAMMPS to relax the structure using a potential. Most of the kwargs can be found from the LAMMPS documentation.
 
 .. autoclass:: structopt.common.individual.relaxations.LAMMPS
 
-The potential files available to use are listed below and are from the default potentials included from LAMMPS. Given a potential, enter in the ``potential_file`` kwarg as "$STRUCTOPT_HOME/potentials/<name>". Note also that different potentials will have different lines of the ``pair_style`` kwarg. If the user would like to use an unavailable potential file, please submit an email to zxu39@wisc.edu, and the potential will be added.
+The potential files available to use are listed below and are from the default potentials included from LAMMPS. Given a potential, enter in the ``potential_file`` kwarg as ``"$STRUCTOPT_HOME/potentials/<name>"``. Note also that different potentials will have different lines of the ``pair_style`` kwarg. If the user would like to use an unavailable potential file, please submit a pull request to this repository and the potential will be added. Currently available potentials can be found in the ``potentials/`` directory.
 
 `AlCu.eam.alloy`: Aluminum and copper alloy EAM (Cai and Ye, Phys Rev B, 54, 8398-8410 (1996))
 
@@ -348,7 +321,7 @@ The potential files available to use are listed below and are from the default p
 Fitnesses
 =========
 
-Fitness evaluates how closely the individual satisfies the minimization criteria. One typical minimization criteria is the stability of a structure, and the formation energy is the fitness. Note, all fitness modules operate so that the *lower* the fitness value the *more* fit it is.
+Fitnesses evaluate the "goodness" of the individual, for example the simulated energy of the structure. Lower fitness values are better.
 
 Fitnesses differ than the previous operations in that they require varying amounts of resources. Hence, a subsequent section, Parallelization, will introduce ways to run your job with varying levels of parallel performance.
 
@@ -369,7 +342,7 @@ Example::
     }
 
 
-The string for *fitness_i*,  is the name of the fitness one wants to use. The weight *w_i* is the constant to multiply the fitness value returned by the *fitness_i* module. Not that all selections and predators operate on the **total** fitness, which is a sum of each fitness and their weight.  *kwargs_i* are dictionaries that input the kwargs to the fitness function one is using. These will be specific to the function. More details of each fitness module will be given in the following subsections
+The string for *fitness_i*,  is the name of the fitness one wants to use. The weight *w_i* is the constant to multiply the fitness value returned by the *fitness_i* module. Note that all selections and predators operate on the **total** fitness, which is a sum of each fitness and their weight.  *kwargs_i* are dictionaries that input the kwargs to the fitness function one is using. These will be specific to the function. More details of each fitness module will be given in the following subsections.
 
 LAMMPS
 ++++++
@@ -378,7 +351,7 @@ The LAMMPS fitness module calls LAMMPS to calculate the potential energy of the 
 
 .. autoclass:: structopt.common.individual.fitnesses.LAMMPS
 
-The potential files available to use are listed below and are from the default potentials included from LAMMPS. Given a potential, enter in the ``potential_file`` kwarg as "$STRUCTOPT_HOME/potentials/<name>". Note also that different potentials will have different lines of the ``pair_style`` kwarg. If the user would like to use an unavailable potential file, please submit an email to zxu39@wisc.edu, and the potential will be added.
+The potential files available to use are listed below and are from the default potentials included from LAMMPS. Given a potential, enter in the ``potential_file`` kwarg as ``"$STRUCTOPT_HOME/potentials/<name>"``. Note also that different potentials will have different lines of the ``pair_style`` kwarg. If the user would like to use an unavailable potential file, please submit a pull request to this repository and the potential will be added.
 
 `AlCu.eam.alloy`: Aluminum and copper alloy EAM (Cai and Ye, Phys Rev B, 54, 8398-8410 (1996))
 
@@ -396,14 +369,18 @@ In addition to the module-specific parameters, each module requires two parallel
 Example::
 
     "relaxations": {
-        "LAMMPS": {"order": 0,
-                   "kwargs": {"use_mpi4py": true,
-                              "MPMD_cores_per_structure": 0,
-                              "keep_files": true,
-                              "min_style": "cg\nmin_modify line quadratic",
-                              "minimize": "1e-8 1e-8 5000 10000",
-                              "pair_style": "eam/alloy",
-                              "potential_file": "$STRUCTOPT_HOME/potentials/ZrCuAl2011.eam.alloy",
-                              "thermo_steps": 1000}}
+        "LAMMPS": {
+            "order": 0,
+            "use_mpi4py": true,
+            "kwargs": {
+                "MPMD_cores_per_structure": 0,
+                "keep_files": true,
+                "min_style": "cg\nmin_modify line quadratic",
+                "minimize": "1e-8 1e-8 5000 10000",
+                "pair_style": "eam/alloy",
+                "potential_file": "$STRUCTOPT_HOME/potentials/ZrCuAl2011.eam.alloy",
+                "thermo_steps": 1000
+            }
+        }
     }
 

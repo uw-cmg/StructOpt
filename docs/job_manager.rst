@@ -39,7 +39,7 @@ The script below is an example script of submitting a single job to a queue usin
 
 2. ``optimizer``: This is a string of the optimizer file used for the calculation. These files can be found in the ``structopt/optimizers`` folder. Upon run, a copy of this script is placed insde of the ``calcdir`` directory and accessed from there.
 
-3. ``StructOpt_parameters``: This is a dictionary object that should mirror the input file you are trying to submit
+3. ``structopt_parameters``: This is a dictionary object that should mirror the input file you are trying to submit
 
 4. ``submit_parameters``: This dictionary holds the submit parameters. These will be specific to the queue system in use. In this example, we specify the the submission system, queue, number of nodes, number of cores, and walltime.
 
@@ -50,39 +50,10 @@ The script below is an example script of submitting a single job to a queue usin
 
     calcdir = 'job_manager_examples/Au55-example'
 
-    LAMMPS_parameters = {"use_mpi4py": True,
-                         "MPMD": 0,
-                         "keep_files": False,
-                         "min_style": "cg",
-                         "min_modify": "line quadratic",
-                         "minimize": "1e-8 1e-8 5000 10000",
-                         "pair_style": "eam",
-                         "potential_file": "$STRUCTOPT_HOME/potentials/Au_u3.eam",
-                         "thermo_steps": 0}
-
-    StructOpt_parameters = {
+    structopt_parameters = {
         "seed": 0,
         "structure_type": "cluster",
-        "generators": {"sphere": {"number_of_individuals": 20,
-                                  "kwargs": {"atomlist": [["Au", 55]],
-                                             "cell": [20, 20, 20]}}},
-        "fitnesses": {"LAMMPS": {"weight": 1.0,
-                       "kwargs": LAMMPS_parameters}},
-        "relaxations": {"LAMMPS": {"order": 0,
-                                   "kwargs": LAMMPS_parameters}},
-        "convergence": {"max_generations": 10},
-        "mutations": {"move_atoms": {"probability": 0.1},
-                      "rotate_cluster": {"probability": 0.1}},
-        "crossovers": {"rotate": {"probability": 0.7}},
-        "predators": {"best": {"probability": 1.0}},
-        "selections": {"rank": {"probability": 1.0,
-                                "kwargs": {"unique_pairs": False,
-                                           "unique_parents": False}}},
-        "fingerprinters": {"keep_best": True,
-                           "diversify_module": {"probability": 1.0,
-                                                "kwargs": {"module": "LAMMPS",
-                                                           "min_diff": 0.001}}},
-        "post_processing": {"XYZs": -1},
+        ...
     }
 
     submit_parameters = {'system': 'PBS',
@@ -93,7 +64,7 @@ The script below is an example script of submitting a single job to a queue usin
 
     optimizer = 'genetic.py'
 
-    job = JobManager(calcdir, optimizer, StructOpt_parameters, submit_parameters)
+    job = JobManager(calcdir, optimizer, structopt_parameters, submit_parameters)
     job.optimize()
 
 Upon running this script, the user should get back an exception called ``structopt.utilities.exceptions.Submitted`` with the jobid. This is normal behavior and communicates that the job has successfully been submitted.
@@ -112,39 +83,10 @@ In the previous script, submitting a single job successfully with ``JobManager.o
     from structopt.utilities.job_manager import JobManager
     from structopt.utilities.exceptions import Running, Submitted, Queued
 
-    LAMMPS_parameters = {"use_mpi4py": True,
-                         "MPMD": 0,
-                         "keep_files": False,
-                         "min_style": "cg",
-                         "min_modify": "line quadratic",
-                         "minimize": "1e-8 1e-8 5000 10000",
-                         "pair_style": "eam",
-                         "potential_file": "$STRUCTOPT_HOME/potentials/Au_u3.eam",
-                         "thermo_steps": 0}
-
-    StructOpt_parameters = {
+    structopt_parameters = {
         "seed": 0,
         "structure_type": "cluster",
-        "generators": {"sphere": {"number_of_individuals": 20,
-                                  "kwargs": {"atomlist": [["Au", 55]],
-                                             "cell": [20, 20, 20]}}},
-        "fitnesses": {"LAMMPS": {"weight": 1.0,
-                       "kwargs": LAMMPS_parameters}},
-        "relaxations": {"LAMMPS": {"order": 0,
-                                   "kwargs": LAMMPS_parameters}},
-        "convergence": {"max_generations": 10},
-        "mutations": {"move_atoms": {"probability": 0.1},
-                      "rotate_cluster": {"probability": 0.1}},
-        "crossovers": {"rotate": {"probability": 0.7}},
-        "predators": {"best": {"probability": 1.0}},
-        "selections": {"rank": {"probability": 1.0,
-                                "kwargs": {"unique_pairs": False,
-                                           "unique_parents": False}}},
-        "fingerprinters": {"keep_best": True,
-                           "diversify_module": {"probability": 1.0,
-                                                "kwargs": {"module": "LAMMPS",
-                                                           "min_diff": 0.001}}},
-        "post_processing": {"XYZs": -1},
+        ...
     }
 
     submit_parameters = {'system': 'PBS',
@@ -157,10 +99,10 @@ In the previous script, submitting a single job successfully with ``JobManager.o
 
     seeds = [0, 1, 2, 3, 4]
     for seed in seeds:
-        StructOpt_parameters['seed'] = seed
+        structopt_parameters['seed'] = seed
         calcdir = 'job_manager_examples/Au55-seed-{}'.format(seed)
 
-        job = JobManager(calcdir, optimizer, StructOpt_parameters, submit_parameters)
+        job = JobManager(calcdir, optimizer, structopt_parameters, submit_parameters)
 
         try:
             job.optimize()
@@ -203,39 +145,10 @@ One way of using these three exceptions is below. If the job is submitted or Que
 
     calcdir = 'job_manager_examples/Au55-example'
 
-    LAMMPS_parameters = {"use_mpi4py": True,
-                         "MPMD": 0,
-                         "keep_files": False,
-                         "min_style": "cg",
-                         "min_modify": "line quadratic",
-                         "minimize": "1e-8 1e-8 5000 10000",
-                         "pair_style": "eam",
-                         "potential_file": "$STRUCTOPT_HOME/potentials/Au_u3.eam",
-                         "thermo_steps": 0}
-
-    StructOpt_parameters = {
+    structopt_parameters = {
         "seed": 0,
         "structure_type": "cluster",
-        "generators": {"sphere": {"number_of_individuals": 20,
-                                  "kwargs": {"atomlist": [["Au", 55]],
-                                             "cell": [20, 20, 20]}}},
-        "fitnesses": {"LAMMPS": {"weight": 1.0,
-                       "kwargs": LAMMPS_parameters}},
-        "relaxations": {"LAMMPS": {"order": 0,
-                                   "kwargs": LAMMPS_parameters}},
-        "convergence": {"max_generations": 10},
-        "mutations": {"move_atoms": {"probability": 0.1},
-                      "rotate_cluster": {"probability": 0.1}},
-        "crossovers": {"rotate": {"probability": 0.7}},
-        "predators": {"best": {"probability": 1.0}},
-        "selections": {"rank": {"probability": 1.0,
-                                "kwargs": {"unique_pairs": False,
-                                           "unique_parents": False}}},
-        "fingerprinters": {"keep_best": True,
-                           "diversify_module": {"probability": 1.0,
-                                                "kwargs": {"module": "LAMMPS",
-                                                           "min_diff": 0.001}}},
-        "post_processing": {"XYZs": -1},
+        ...
     }
 
     submit_parameters = {'system': 'PBS',
@@ -246,7 +159,7 @@ One way of using these three exceptions is below. If the job is submitted or Que
 
     optimizer = 'genetic.py'
 
-    job = JobManager(calcdir, optimizer, StructOpt_parameters, submit_parameters)
+    job = JobManager(calcdir, optimizer, structopt_parameters, submit_parameters)
     try:
         job.optimize()
     except (Submitted, Queued):
@@ -272,39 +185,10 @@ Sometimes jobs need to be restarted or continued from the last generation. The `
 
     calcdir = 'job_manager_examples/Au55-example'
 
-    LAMMPS_parameters = {"use_mpi4py": True,
-                         "MPMD": 0,
-                         "keep_files": False,
-                         "min_style": "cg",
-                         "min_modify": "line quadratic",
-                         "minimize": "1e-8 1e-8 5000 10000",
-                         "pair_style": "eam",
-                         "potential_file": "$STRUCTOPT_HOME/potentials/Au_u3.eam",
-                         "thermo_steps": 0}
-
-    StructOpt_parameters = {
+    structopt_parameters = {
         "seed": 0,
-        "structure_type": "cluster",
-        "generators": {"sphere": {"number_of_individuals": 20,
-                                  "kwargs": {"atomlist": [["Au", 55]],
-                                             "cell": [20, 20, 20]}}},
-        "fitnesses": {"LAMMPS": {"weight": 1.0,
-                       "kwargs": LAMMPS_parameters}},
-        "relaxations": {"LAMMPS": {"order": 0,
-                                   "kwargs": LAMMPS_parameters}},
-        "convergence": {"max_generations": 10},
-        "mutations": {"move_atoms": {"probability": 0.1},
-                      "rotate_cluster": {"probability": 0.1}},
-        "crossovers": {"rotate": {"probability": 0.7}},
-        "predators": {"best": {"probability": 1.0}},
-        "selections": {"rank": {"probability": 1.0,
-                                "kwargs": {"unique_pairs": False,
-                                           "unique_parents": False}}},
-        "fingerprinters": {"keep_best": True,
-                           "diversify_module": {"probability": 1.0,
-                                                "kwargs": {"module": "LAMMPS",
-                                                           "min_diff": 0.001}}},
-        "post_processing": {"XYZs": -1},
+        "structure_type": "aperiodic",
+        ...
     }
 
     submit_parameters = {'system': 'PBS',
@@ -315,5 +199,5 @@ Sometimes jobs need to be restarted or continued from the last generation. The `
 
     optimizer = 'genetic.py'
 
-    job = JobManager(calcdir, optimizer, StructOpt_parameters, submit_parameters)
+    job = JobManager(calcdir, optimizer, structopt_parameters, submit_parameters)
     job.optimize(restart=True)

@@ -1,0 +1,5 @@
+# Parameter file FEMSIM
+relax_3692.xyz
+./FEM_data.txt
+0.065730041
+1 80 40

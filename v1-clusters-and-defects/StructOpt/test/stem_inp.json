@@ -1,0 +1,19 @@
+{
+    "stem_ref" : "STEM_ref.xyz",
+    "psf" : "PSF.txt",
+    "aber" : [[0,0],[0,0],[22.56,-20.1],[22.08,-7.5],[0.1198,0],[0.9018,-170.1],[0.04964,20.9],[28.43,-120.6],[11.84,153.8],[8.456,76.1],[0.622,0],[2.811,-125.5]],
+    "electron_energy" : 200,
+    "spherical_aberration" : 1.4,
+    "defocus" : 0,
+    "aperture_semiangle" : 24.5,
+    "source_size" : 0.882,
+    "slice_size" : 25.0,
+    "pixels": 976,
+    "chromatic_aberration_coefficient" : 1.4,
+    "delta_E" : 0.73,
+    "scale_factor" : 0.00570113,
+    "grid_sim2exp" : 1,
+    "pixelshift" : false,
+    "keep_files" : false
+}
+

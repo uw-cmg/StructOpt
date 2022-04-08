@@ -1,0 +1,115 @@
+{
+    "logging": {},
+    "structure_type": "periodic",
+    "generators": {
+        "read_xyz": {
+            "number_of_individuals": 2,
+            "kwargs": [
+                "/home/mengjun/projects/StructOpt/input/ana600_reax_relaxed/individual557.xyz",
+                "/home/mengjun/projects/StructOpt/input/ana600_reax_relaxed/individual140.xyz"
+            ]
+        }
+    },
+    "fitnesses": {
+        "LAMMPS": {
+            "weight": 1.0,
+            "use_mpi4py": true,
+            "MPMD": 0,
+            "kwargs": {
+                "keep_files": false,
+                "min_style": "cg",
+                "min_modify": "line quadratic",
+                "minimize": "1e-10 1e-10 0 0",
+                "pair_style": "reax/c NULL",
+                "potential_file": "/home/mengjun/projects/StructOpt/v2-experiments-and-energy/potentials/ffield.reax.TiO2H2O",
+                "thermo_steps": 0
+            }
+        },
+        "FEMSIM": {
+            "weight": 1000000000000.0,
+            "use_mpi4py": false,
+            "MPMD": "8-16",
+            "njobs": 2,
+            "skip_bad_lammps": true,
+            "kwargs": {
+                "parameter_filename": "/home/mengjun/projects/StructOpt/input/ana600_reax_relaxed/TiO2FEM.in",
+                "vk_data_filename": "/home/mengjun/projects/StructOpt/input/vk_TiO2_R14Ang_032020.txt",
+                "xsize": 18.9743911869,
+                "ysize": 18.9743911869,
+                "zsize": 18.9743911869,
+                "Q": 0.04546497775,
+                "nphi": 1,
+                "npsi": 80,
+                "ntheta": 40,
+                "thickness_scaling_factor": 31.62
+            }
+        }
+    },
+    "relaxations": {
+        "LAMMPS": {
+            "order": 0,
+            "use_mpi4py": true,
+            "njobs": 1,
+            "MPMD": 0,
+            "kwargs": {
+                "keep_files": false,
+                "min_style": "cg",
+                "min_modify": "line quadratic",
+                "minimize": "0.0 1e-6 10000 10000",
+                "pair_style": "reax/c NULL",
+                "potential_file": "/home/mengjun/projects/StructOpt/v2-experiments-and-energy/potentials/ffield.reax.TiO2H2O",
+                "thermo_steps": 0
+            }
+        }
+    },
+    "convergence": {
+        "max_generations": 1000
+    },
+    "mutations": {
+        "keep_original": true,
+        "keep_original_best": true,
+        "move_atoms": {
+            "probability": 1.0
+        },
+        "swap_positions": {
+            "probability": 0.0
+        },
+        "swap_species": {
+            "probability": 0.0
+        },
+        "rotate_atoms": {
+            "probability": 0.0
+        },
+        "rotate_cluster": {
+            "probability": 0.0
+        },
+        "rotate_all": {
+            "probability": 0.0
+        }
+    },
+    "fingerprinters": {
+        "all_close_atom_positions": {
+            "probability": 1.0
+        }
+    },
+    "crossovers": {
+        "rotate": {
+            "probability": 1.0
+        }
+    },
+    "predators": {
+        "tournament": {
+            "probability": 1.0
+        }
+    },
+    "selections": {
+        "rank": {
+            "probability": 1.0
+        }
+    },
+    "fileio": {},
+    "post_processing": {
+        "XYZs": 0
+    },
+    "tools": {}
+}

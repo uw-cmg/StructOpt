@@ -1,0 +1,128 @@
+{
+    "seed": 0,
+    "logging": {},
+    "structure_type": "aperiodic",
+    "generators": {
+        "fcc": {
+            "number_of_individuals": 20,
+            "kwargs": {
+                "atomlist": [["Pt", 561]],
+                "orientation": "100",
+                "a": 3.92,
+                "cell": [40.0, 40.0, 40.0]
+            }
+        }
+    },
+    "fitnesses": {
+        "LAMMPS": {
+            "weight": 1.0,
+            "use_mpi4py": true,
+            "kwargs": {
+                "MPMD": 0,
+                "keep_files": false,
+                "min_style": "cg",
+                "min_modify": "line quadratic",
+                "minimize": "1e-8 1e-8 0 0",
+                "pair_style": "eam/fs",
+                "potential_file": "$STRUCTOPT_HOME/potentials/PtMo_RAMPAGE_lime.fs",
+                "thermo_steps": 0,
+                "normalize": {"natoms": true},
+                "reference": {"Pt": -5.77, "Mo": -6.687}
+            }
+        },
+        "STEM": {
+            "weight": 100,
+            "use_mpi4py": true,
+            "kwargs": {
+                "target": "$STRUCTOPT_HOME/examples/genetic/aperiodic/Pt561-LAMMPS-STEM/Pt561-cuboctahedron.xyz",
+                "HWHM": 0.4,
+                "dimensions": [40.0, 40.0],
+                "resolution": 5.0,
+                "zed": 1.7,
+                "normalize": {"SSE": true, "nprotons": true}
+            }
+        }
+    },
+    "relaxations": {
+        "LAMMPS": {
+            "order": 0,
+            "use_mpi4py": true,
+            "kwargs": {
+                "MPMD": 0,
+                "keep_files": false,
+                "min_style": "cg",
+                "min_modify": "line quadratic",
+                "minimize": "1e-8 1e-8 5000 10000",
+                "pair_style": "eam/fs",
+                "potential_file": "$STRUCTOPT_HOME/potentials/PtMo_RAMPAGE_lime.fs",
+                "thermo_steps": 0,
+                "repair": true
+            }
+        },
+        "STEM": {
+            "order": 1,
+            "use_mpi4py": true,
+            "kwargs": {
+                "target": "$STRUCTOPT_HOME/examples/genetic/aperiodic/Pt561-LAMMPS-STEM/Pt561-cuboctahedron.xyz",
+                "HWHM": 0.4,
+                "dimensions": [40.0, 40.0],
+                "resolution": 5.0,
+                "zed": 1.7,
+                "normalize": {"SSE": true, "nprotons": true}
+            }
+        }
+    },
+    "convergence": {
+        "max_generations": 2000
+    },
+    "mutations": {
+        "move_surface_atoms": {
+            "probability": 0.1
+        },
+        "move_surface_STEM": {
+            "probability": 0.3,
+            "kwargs": {
+                "STEM_parameters": {
+                    "target": "$STRUCTOPT_HOME/examples/genetic/aperiodic/Pt561-LAMMPS-STEM/Pt561-cuboctahedron.xyz",
+                    "HWHM": 0.4,
+                    "dimensions": [40.0, 40.0],
+                    "resolution": 5.0,
+                    "zed": 1.7,
+                    "normalize": {"SSE": true, "nprotons": true}
+                },
+                "move_CN": 11,
+                "surf_CN": 11
+            }
+        }
+    },
+    "fingerprinters": {
+    },
+    "crossovers": {
+        "rotate": {
+            "probability": 0.7
+        }
+    },
+    "predators": {
+        "tournament": {
+            "probability": 1.0,
+            "kwargs": {
+                "tournament_size": 8
+            }
+        }
+    },
+    "selections": {
+        "tournament": {
+            "probability": 1.0,
+            "kwargs": {
+                "tournament_size": 8,
+                "unique_pairs": false,
+                "unique_parents": true
+            }
+        }
+    },
+    "fileio": {},
+    "post_processing": {
+        "XYZs": -1
+    },
+    "tools": {}
+}

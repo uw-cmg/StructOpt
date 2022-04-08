@@ -1,0 +1,51 @@
+$mast
+pegloop1 system_name
+$end
+
+$recipe
+Individual
+$end
+
+
+$ingredients
+begin ingredients_global
+mast_queue         morgan
+mast_nodes         1
+mast_ppn           16
+mast_walltime      48
+mast_exec          /usr/mpi/intel/mvapich2-1.9/bin/mpiexec ~/shared/vasp.5.3.5-std > vasp.out     
+mast_xc            PBE
+mast_kpoints 1x1x1
+lreal Auto
+encut 450
+nsw 100
+ediff 1e-5
+ediffg -0.005
+lcharg False
+lwave False
+ismear 0
+sigma 0.2
+npar 4
+prec Accurate
+mast_program   vasp
+mast_write_method            write_singlerun
+mast_ready_method            ready_singlerun
+mast_run_method              run_singlerun
+mast_complete_method         complete_singlerun
+end
+
+
+begin static
+end
+
+begin relax
+end
+
+
+$end
+
+
+$structure
+pegloop1 posfile
+$end
+

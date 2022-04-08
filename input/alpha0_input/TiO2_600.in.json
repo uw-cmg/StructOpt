@@ -1,0 +1,110 @@
+{
+    "logging": {},
+    "structure_type": "periodic",
+    "generators": {
+        "read_xyz": {
+            "number_of_individuals": 6,
+            "kwargs": ["/home/user/OtherProjects/StructOpt/input/alpha0_input/anatase_tio2.xyz", "/home/user/OtherProjects/StructOpt/input/alpha0_input/anatase_tio2_300K.xyz", "/home/user/OtherProjects/StructOpt/input/alpha0_input/anatase_tio2_673K.xyz", "/home/user/OtherProjects/StructOpt/input/alpha0_input/anatase_tio2_2000K.xyz", "/home/user/OtherProjects/StructOpt/input/alpha0_input/anatase_tio2_3000K.xyz","/home/user/OtherProjects/StructOpt/input/alpha0_input/anatase_tio2_4000K.xyz"] 
+            }
+        },
+    "fitnesses": {
+        "LAMMPS": {
+            "weight": 1.0,
+            "use_mpi4py": true,
+            "MPMD": 0,
+            "kwargs": {
+                "keep_files": true,
+                "min_style": "cg",
+                "min_modify": "line quadratic",
+                "minimize": "1e-10 1e-10 0 0",
+                "pair_style": "meam/c",
+                "potential_file": "/home/user/OtherProjects/StructOpt/v2-experiments-and-energy/potentials/library.meam",
+                "thermo_steps": 0
+            }
+        },
+        "FEMSIM": {
+            "njobs": 4,
+            "weight": 0.0,
+            "use_mpi4py": false,
+            "MPMD": "8-16",
+            "kwargs": {
+                "parameter_filename": "/home/user/OtherProjects/StructOpt/input/alpha0_input/TiO2_600.in",
+                "vk_data_filename": "/home/user/OtherProjects/StructOpt/input/alpha0_input/vk_TiO2_R14Ang_032020.txt",
+                "xsize": 19.00,
+                "ysize": 19.00,
+                "zsize": 19.00,
+                "Q": 0.0453969,
+                "nphi": 1,
+                "npsi": 80,
+                "ntheta": 40,
+                "thickness_scaling_factor": 15.0
+            }
+        }
+    },
+    "relaxations": {
+        "LAMMPS": {
+            "njobs": 4,
+            "order": 0,
+            "use_mpi4py": true,
+            "MPMD": 0,
+            "kwargs": {
+                "keep_files": true,
+                "min_style": "cg",
+                "min_modify": "line quadratic",
+                "minimize": "1e-10 1e-10 10000 10000",
+                "pair_style": "meam/c",
+                "potential_file": "/home/user/OtherProjects/StructOpt/v2-experiments-and-energy/potentials/library.meam",
+                "thermo_steps": 0
+            }
+        }
+    },
+    "convergence": {
+        "max_generations": 100000
+    },
+    "mutations": {
+        "preserve_best": true,
+        "move_atoms": {
+            "probability": 1.0
+        },
+        "swap_positions": {
+            "probability": 0.0
+        },
+        "swap_species": {
+            "probability": 0.0
+        },
+        "rotate_atoms": {
+            "probability": 0.0
+        },
+        "rotate_cluster": {
+            "probability": 0.0
+        },
+        "rotate_all": {
+            "probability": 0.0
+        }
+    },
+    "fingerprinters": {
+        "all_close_atom_positions": {
+            "probability": 1.0
+        }
+    },
+    "crossovers": {
+        "rotate": {
+            "probability": 1.0
+        }
+    },
+    "predators": {
+        "tournament": {
+            "probability": 1.0
+        }
+    },
+    "selections": {
+        "rank": {
+            "probability": 1.0
+        }
+    },
+    "fileio": {},
+    "post_processing": {
+        "XYZs": 0
+    },
+    "tools": {}
+}

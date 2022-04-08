@@ -1,0 +1,2 @@
+class FEMSIMError(Exception):
+    pass

@@ -1,0 +1,125 @@
+{
+    "logging": {},
+    "structure_type": "periodic",
+    "generators": {
+        "read_xyz": {
+            "number_of_individuals": 10,
+            "kwargs": [
+                "/home/mengjun/TiO2_structopt/input_struct/ana600_comb_relaxed/individual65.xyz",
+                "/home/mengjun/TiO2_structopt/input_struct/ana600_comb_relaxed/individual2504.xyz",
+                "/home/mengjun/TiO2_structopt/input_struct/ana600_comb_relaxed/individual404.xyz",
+                "/home/mengjun/TiO2_structopt/input_struct/ana600_comb_relaxed/4000.xyz",
+                "/home/mengjun/TiO2_structopt/input_struct/ana600_comb_relaxed/individual164.xyz",
+                "/home/mengjun/TiO2_structopt/input_struct/ana600_comb_relaxed/individual2.xyz",
+                "/home/mengjun/TiO2_structopt/input_struct/ana600_comb_relaxed/individual21.xyz",
+                "/home/mengjun/TiO2_structopt/input_struct/ana600_comb_relaxed/individual922.xyz",
+                "/home/mengjun/TiO2_structopt/input_struct/ana600_comb_relaxed/individual3690.xyz",
+                "/home/mengjun/TiO2_structopt/input_struct/ana600_comb_relaxed/0.xyz"
+            ]
+        }
+    },
+    "fitnesses": {
+        "LAMMPS": {
+            "weight": 1.0,
+            "use_mpi4py": true,
+            "MPMD": 0,
+            "kwargs": {
+                "keep_files": false,
+                "min_style": "cg",
+                "min_modify": "line quadratic",
+                "minimize": "1e-10 1e-10 0 0",
+                "pair_style": "comb",
+                "charge_equilibration": false,
+                "potential_file": "/home/mengjun/opt/StructOpt/v2-experiments-and-energy/potentials/ffield.comb",
+                "thermo_steps": 0
+            }
+        },
+        "FEMSIM": {
+            "weight": 100000.0,
+            "use_mpi4py": false,
+            "MPMD": "8-16",
+            "njobs": 16,
+            "skip_bad_lammps": true,
+            "kwargs": {
+                "parameter_filename": "/home/mengjun/TiO2_structopt/input_struct/ana600_comb_relaxed/TiO2FEM.in",
+                "vk_data_filename": "/home/mengjun/TiO2_structopt/input_struct/vk_TiO2_R14Ang_032020.txt",
+                "xsize": 18.972208814,
+                "ysize": 18.972208814,
+                "zsize": 18.972208814,
+                "Q": 0.045470208,
+                "nphi": 1,
+                "npsi": 80,
+                "ntheta": 40,
+                "thickness_scaling_factor": 31.625
+            }
+        }
+    },
+    "relaxations": {
+        "LAMMPS": {
+            "order": 0,
+            "use_mpi4py": true,
+            "njobs": 16,
+            "MPMD": 0,
+            "kwargs": {
+                "keep_files": false,
+                "min_style": "cg",
+                "min_modify": "line quadratic",
+                "minimize": "0.0 1e-6 10000 10000",
+                "pair_style": "comb",
+                "charge_equilibration": false,
+                "potential_file": "/home/mengjun/opt/StructOpt/v2-experiments-and-energy/potentials/ffield.comb",
+                "thermo_steps": 0
+            }
+        }
+    },
+    "convergence": {
+        "max_generations": 1000
+    },
+    "mutations": {
+        "keep_original": true,
+        "keep_original_best": true,
+        "move_atoms": {
+            "probability": 1.0
+        },
+        "swap_positions": {
+            "probability": 0.0
+        },
+        "swap_species": {
+            "probability": 0.0
+        },
+        "rotate_atoms": {
+            "probability": 0.0
+        },
+        "rotate_cluster": {
+            "probability": 0.0
+        },
+        "rotate_all": {
+            "probability": 0.0
+        }
+    },
+    "fingerprinters": {
+        "all_close_atom_positions": {
+            "probability": 1.0
+        }
+    },
+    "crossovers": {
+        "rotate": {
+            "probability": 1.0
+        }
+    },
+    "predators": {
+        "tournament": {
+            "probability": 1.0
+        }
+    },
+    "selections": {
+        "rank": {
+            "probability": 1.0
+        }
+    },
+    "fileio": {},
+    "post_processing": {
+        "XYZs": 0
+    },
+    "tools": {}
+}

@@ -1,0 +1,12 @@
+{
+    "parameter_filename": "paramfile.in",
+    "vk_data_filename": "fem_exp_Zr50Cu35Al15_t3.txt",
+    "xsize": 28.2842712474619,
+    "ysize": 28.2842712474619,
+    "zsize": 28.2842712474619,
+    "Q": 0.0305,
+    "nphi": 1,
+    "npsi": 40,
+    "ntheta": 20,
+    "thickness_scaling_factor": 28.6378
+}

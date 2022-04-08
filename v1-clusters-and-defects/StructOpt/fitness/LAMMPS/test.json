@@ -1,0 +1,8 @@
+{
+    "pair_style": "eam",
+    "pot_file": "/home/usitguest/USIT/dropbox_app/Au_u3.eam",
+    "keep_files": true,
+    "min_style": "cg\nmin_modify line quadratic",
+    "minimize": "1e-8 1e-8 5000 10000",
+    "thermo_steps": 1
+}
